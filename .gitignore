@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 /Vorlage
+/public/favicon.ico
+/public/apple-touch-icon.png
