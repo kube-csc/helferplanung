@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
        */
 
         Team::factory(1)->create();
+        $this->call(EventSeeder::class);
+        $this->call(OperationalLocationSeeder::class);
+
         //User::factory(1)->create();
 
         // \App\Models\User::factory()->create([
