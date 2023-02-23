@@ -6,10 +6,15 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -17,124 +22,68 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
+    protected static ?string $modelLabel = 'Mitglied';
+    protected static ?string $pluralModelLabel = 'Mitglieder';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationGroup = 'Mitgliederverwaltung';
     public static function form(Form $form): Form
     {
-        return $form
+        return $form->schema(
+        Card::make()
+            ->columns(12)
             ->schema([
-                Forms\Components\TextInput::make('nachname')
-                    ->maxLength(40),
-                Forms\Components\TextInput::make('vorname')
-                    ->maxLength(40),
-                Forms\Components\TextInput::make('geschlecht')
-                    ->maxLength(1),
-                Forms\Components\DatePicker::make('geburtsdatum'),
-                Forms\Components\DatePicker::make('vereinseintritt'),
-                Forms\Components\DatePicker::make('vereinsaustritt'),
-                Forms\Components\TextInput::make('sportSections_id')
-                    ->required(),
-                Forms\Components\TextInput::make('password_alt')
-                    ->password()
-                    ->maxLength(20),
-                Forms\Components\TextInput::make('webspace')
-                    ->required(),
-                Forms\Components\TextInput::make('regattatrainer')
-                    ->required(),
-                Forms\Components\TextInput::make('trainernachricht')
+                TextInput::make('name')
+                    ->label('Benutzername')
+                    ->columnSpan(12)
+                    ->maxLength(255),
+                TextInput::make('nachname')
+                    ->columnSpan(6)
                     ->required()
-                    ->maxLength(1),
-                Forms\Components\TextInput::make('gewicht')
-                    ->required(),
-                Forms\Components\TextInput::make('position')
-                    ->required(),
-                Forms\Components\TextInput::make('seite')
-                    ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\TextInput::make('role')
-                    ->required(),
-                Forms\Components\TextInput::make('vorstand_id')
-                    ->required(),
-                Forms\Components\Textarea::make('beschreibung')
-                    ->maxLength(65535),
-                Forms\Components\TextInput::make('telefon')
+                    ->maxLength(40),
+                TextInput::make('vorname')
+                    ->columnSpan(6)
+                    ->required()
+                    ->maxLength(40),
+                Radio::make('geschlecht')
+                    ->columnSpan(3)
+                    ->required()
+                    ->options([
+                        'm' => 'männlich',
+                        'w' => 'weiblich'
+                    ]),
+                hidden::make('role')
+                    ->default('1'),
+                TextInput::make('telefon')
+                    ->columnSpan(3)
                     ->tel()
                     ->required()
                     ->maxLength(25),
-                Forms\Components\TextInput::make('userPortraet')
-                    ->required()
-                    ->maxLength(15),
-                Forms\Components\TextInput::make('pixx')
-                    ->required(),
-                Forms\Components\TextInput::make('pixy')
-                    ->required(),
-                Forms\Components\TextInput::make('name')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
+                    ->columnSpan(3)
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
+                TextInput::make('password')
+                    ->columnSpan(12)
                     ->password()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('two_factor_secret')
-                    ->maxLength(65535),
-                Forms\Components\Textarea::make('two_factor_recovery_codes')
-                    ->maxLength(65535),
-                Forms\Components\DateTimePicker::make('two_factor_confirmed_at'),
-                Forms\Components\TextInput::make('current_team_id'),
-                Forms\Components\Textarea::make('profile_photo_path')
-                    ->maxLength(65535),
-            ]);
+                //TextInput::make('current_team_id'),
+            ])
+        );
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nachname'),
-                Tables\Columns\TextColumn::make('vorname'),
-                Tables\Columns\TextColumn::make('geschlecht'),
-                Tables\Columns\TextColumn::make('geburtsdatum')
-                    ->date(),
-                Tables\Columns\TextColumn::make('vereinseintritt')
-                    ->date(),
-                Tables\Columns\TextColumn::make('vereinsaustritt')
-                    ->date(),
-                Tables\Columns\TextColumn::make('sportSections_id'),
-                Tables\Columns\TextColumn::make('webspace'),
-                Tables\Columns\TextColumn::make('regattatrainer'),
-                Tables\Columns\TextColumn::make('trainernachricht'),
-                Tables\Columns\TextColumn::make('gewicht'),
-                Tables\Columns\TextColumn::make('position'),
-                Tables\Columns\TextColumn::make('seite'),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('role'),
-                Tables\Columns\TextColumn::make('vorstand_id'),
-                Tables\Columns\TextColumn::make('beschreibung'),
-                Tables\Columns\TextColumn::make('telefon'),
-                Tables\Columns\TextColumn::make('userPortraet'),
-                Tables\Columns\TextColumn::make('pixx'),
-                Tables\Columns\TextColumn::make('pixy'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('two_factor_secret'),
-                Tables\Columns\TextColumn::make('two_factor_recovery_codes'),
-                Tables\Columns\TextColumn::make('two_factor_confirmed_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('current_team_id'),
-                Tables\Columns\TextColumn::make('profile_photo_path'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                TextColumn::make('nachname'),
+                TextColumn::make('vorname'),
+                TextColumn::make('geschlecht'),
+                TextColumn::make('telefon'),
+                TextColumn::make('name')
+                    ->label('Benutzername'),
+                TextColumn::make('email'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -148,14 +97,14 @@ class UserResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -163,8 +112,8 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
