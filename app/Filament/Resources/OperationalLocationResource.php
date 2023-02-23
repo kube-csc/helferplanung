@@ -21,12 +21,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class OperationalLocationResource extends Resource
 {
     protected static ?string $model = OperationalLocation::class;
-
     protected static ?string $modelLabel = 'Einsatzort';
     protected static ?string $pluralModelLabel = 'Einsatzorte';
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
+    protected static ?string $navigationIcon = 'heroicon-o-location-marker';
+    protected static ?string $navigationGroup = 'Einsatzplaner';
     public static function form(Form $form): Form
     {
         return $form->schema(

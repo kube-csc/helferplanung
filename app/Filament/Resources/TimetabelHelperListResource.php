@@ -25,11 +25,10 @@ class TimetabelHelperListResource extends Resource
 {
     protected static ?string $model = TimetabelHelperList::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
     protected static ?string $modelLabel = 'Einsatzplan';
     protected static ?string $pluralModelLabel = 'Einsatzpläne';
-
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationGroup = 'Einsatzplaner';
     public static function form(Form $form): Form
     {
         return $form->schema(
