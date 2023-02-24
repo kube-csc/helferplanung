@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
+use App\Filament\Resources\EventResource\RelationManagers\TimetabelHelperListsRelationManager;
 use App\Models\Event;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -78,7 +79,7 @@ class EventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TimetabelHelperListsRelationManager::class
         ];
     }
 

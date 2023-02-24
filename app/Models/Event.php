@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    use HasFactory;
    protected $guarded = [];
 
     public function timetabelHelperLists()
     {
-        return $this->hasMany(timetabelHelperLists::class);
+        return $this->hasMany(timetabelHelperList::class);
     }
 }
