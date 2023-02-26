@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TimetabelHelperListsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'timetabelHelperLists';
+    protected static string $relationship = 'TimetabelHelperLists';
 
     protected static ?string $recordTitleAttribute = 'anzahlHelfer';
 

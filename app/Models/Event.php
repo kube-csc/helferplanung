@@ -10,8 +10,8 @@ class Event extends Model
     use HasFactory;
    protected $guarded = [];
 
-    public function timetabelHelperLists()
+    public function TimetabelHelperLists()
     {
-        return $this->hasMany(timetabelHelperList::class);
+        return $this->hasMany(TimetabelHelperList::class);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class timetabelHelperList extends Model
+class TimetabelHelperList extends Model
 {
     use SoftDeletes;
 
