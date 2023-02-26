@@ -11,12 +11,15 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -59,15 +62,26 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(25),
                 TextInput::make('email')
-                    ->columnSpan(3)
+                    ->columnSpan(6)
                     ->email()
+                    ->unique()
                     ->required()
                     ->maxLength(255),
                 TextInput::make('password')
                     ->columnSpan(12)
                     ->password()
-                    ->required()
-                    ->maxLength(255),
+                    ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
+                    ->minLength(8)
+                    ->same('passwordConfirmation')
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
+                TextInput::make('passwordConfirmation')
+                    ->columnSpan(12)
+                    ->password()
+                    ->label('Password Confirmation')
+                    ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
+                    ->minLength(8)
+                    ->dehydrated(false)
                 //TextInput::make('current_team_id'),
             ])
         );
