@@ -17,6 +17,7 @@ class EventSeeder extends Seeder
                     \DB::table('events')->delete();
 
                             \DB::table('events')->insert(array (
+                                /*
                                 0 =>
                                     array (
                                         'id' => 1,
@@ -199,6 +200,7 @@ class EventSeeder extends Seeder
                                         'updated_at' => '2021-03-28 13:06:42',
                                         'freigabe' => '',
                                     ),
+                                */
                                 6 =>
                                     array (
                                         'id' => 7,
