@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->admin > 2;
+        return $user->admin > 3;
     }
 
     /**

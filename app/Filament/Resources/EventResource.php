@@ -8,12 +8,17 @@ use App\Filament\Resources\EventResource\RelationManagers\TimetabelHelperListsRe
 use App\Models\Event;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -35,12 +40,16 @@ class EventResource extends Resource
                 ->schema([
                     TextInput::make('ueberschrift')
                         ->columnSpan(12),
-                    TextInput::make('datumvon')
+                    DatePicker::make('datumvon')
                         ->label('von Datum')
-                        ->columnSpan(6),
-                    TextInput::make('datumbis')
+                        ->displayFormat('d.m.Y')
+                        ->columnSpan(3),
+                    DatePicker::make('datumbis')
                         ->label('bis Datum')
-                        ->columnSpan(6),
+                        ->displayFormat('d.m.Y')
+                        ->columnSpan(3),
+                    Toggle::make('regatta')
+                        ->columnSpan(3),
                 ])
         );
     }
@@ -55,17 +64,22 @@ class EventResource extends Resource
                 TextColumn::make('datumvon')
                     ->label('von Datum')
                     ->sortable()
-                    ->searchable()
-                    ->date(),
+                    ->dateTime('d.m.Y')
+                    ->searchable(),
                 TextColumn::make('datumbis')
                     ->label('bis Datum')
-                    ->date(),
+                    ->dateTime('d.m.Y'),
                 TextColumn::make('regatta')
                     ->label('Regattamodus')
                     ->searchable(),
+                BooleanColumn::make('regatta')
+                    ->visibleFrom('md'),
             ])
             ->filters([
-                //
+                Filter::make('regatta')
+                    ->query(fn (Builder $query): Builder =>
+                    $query->where('regatta', '1'))
+                          ->default(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

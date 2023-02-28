@@ -29,6 +29,9 @@ class UserResource extends Resource
     protected static ?string $pluralModelLabel = 'Mitglieder';
     protected static ?string $navigationIcon = 'heroicon-o-user';
     protected static ?string $navigationGroup = 'Mitgliederverwaltung';
+
+    //protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form->schema(

@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TimetabelHelperListsRelationManager extends RelationManager
 {
+    protected static ?string $modelLabel = 'Einsatzplan';
+    protected static ?string $pluralModelLabel = 'Einsatzpläne';
     protected static string $relationship = 'TimetabelHelperLists';
 
     protected static ?string $recordTitleAttribute = 'anzahlHelfer';
@@ -25,6 +27,7 @@ class TimetabelHelperListsRelationManager extends RelationManager
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(12)
             ->schema([
                 Select::make('event_id')
                     ->label('Veranstaltung')
@@ -43,12 +46,14 @@ class TimetabelHelperListsRelationManager extends RelationManager
                 DateTimePicker::make('startZeit')
                     ->label('Start Datum / Zeit')
                     ->withoutSeconds()
+                    ->displayFormat('d.m.Y h:m')
                     ->minDate(now())
                     ->columnSpan(3)
                     ->required(),
                 DateTimePicker::make('endZeit')
                     ->label('Start Datum / Zeit')
                     ->withoutSeconds()
+                    ->displayFormat('d.m.Y h:m')
                     ->minDate(now())
                     ->columnSpan(3)
                     ->required(),
@@ -71,12 +76,12 @@ class TimetabelHelperListsRelationManager extends RelationManager
                     ->searchable(),
                 TextColumn::make('startZeit')
                     ->label('Start Datum / Zeit')
-                    ->dateTime('d-m-Y H:i')
+                    ->dateTime('d.m.Y H:i')
                     ->sortable()
                     ->alignRight(),
                 TextColumn::make('endZeit')
                     ->label('Start Datum / Zeit')
-                    ->dateTime('d-m-Y H:i')
+                    ->dateTime('d.m.Y H:i')
                     ->sortable()
                     ->alignRight(),
                 TextColumn::make('anzahlHelfer')

@@ -16,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -52,12 +53,14 @@ class TimetabelHelperListResource extends Resource
                         DateTimePicker::make('startZeit')
                             ->label('Start Datum / Zeit')
                             ->withoutSeconds()
+                            ->displayFormat('d.m.Y h:m')
                             ->minDate(now())
                             ->columnSpan(3)
                             ->required(),
                         DateTimePicker::make('endZeit')
                             ->label('Start Datum / Zeit')
                             ->withoutSeconds()
+                            ->displayFormat('d.m.Y h:m')
                             ->minDate(now())
                             ->columnSpan(3)
                             ->required(),
@@ -84,24 +87,21 @@ class TimetabelHelperListResource extends Resource
                     ->searchable(),
                 TextColumn::make('startZeit')
                     ->label('Start Datum / Zeit')
-                    ->dateTime('d-m-Y H:i')
+                    ->dateTime('d.m.Y H:i')
                     ->sortable()
                     ->alignRight(),
                 TextColumn::make('endZeit')
                     ->label('Start Datum / Zeit')
-                    ->dateTime('d-m-Y H:i')
-                    ->sortable()
+                    ->dateTime('d.m.Y H:i')
                     ->alignRight(),
                 TextColumn::make('anzahlHelfer')
                     ->label('Anzahl der Helfer')
                     ->sortable()
                     ->alignRight(),
             ])
-            ->defaultSort('operationalLocation.einsatzort','startZeit')
+            //->defaultSort('operationalLocation.einsatzort')
             ->defaultSort('startZeit')
             ->filters([
-                //Tables\Filters\TrashedFilter::make(),
-                //ToDo: Filter auf Regatta Events
                 SelectFilter::make('event')
                     ->relationship('event', 'ueberschrift'),
                 SelectFilter::make('operationalLocation')
