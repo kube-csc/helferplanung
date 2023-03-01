@@ -13,6 +13,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -21,7 +22,6 @@ class TimetabelHelperListsRelationManager extends RelationManager
     protected static ?string $modelLabel = 'Einsatzplan';
     protected static ?string $pluralModelLabel = 'Einsatzpläne';
     protected static string $relationship = 'TimetabelHelperLists';
-
     protected static ?string $recordTitleAttribute = 'anzahlHelfer';
 
     public static function form(Form $form): Form
@@ -82,15 +82,17 @@ class TimetabelHelperListsRelationManager extends RelationManager
                 TextColumn::make('endZeit')
                     ->label('Start Datum / Zeit')
                     ->dateTime('d.m.Y H:i')
-                    ->sortable()
                     ->alignRight(),
                 TextColumn::make('anzahlHelfer')
                     ->label('Anzahl der Helfer')
-                    ->sortable()
                     ->alignRight(),
             ])
+            ->defaultSort('startZeit')
             ->filters([
-                //
+                SelectFilter::make('event')
+                    ->relationship('event', 'ueberschrift'),
+                SelectFilter::make('operationalLocation')
+                    ->relationship('operationalLocation', 'einsatzort')
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

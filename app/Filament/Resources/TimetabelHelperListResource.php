@@ -96,16 +96,14 @@ class TimetabelHelperListResource extends Resource
                     ->alignRight(),
                 TextColumn::make('anzahlHelfer')
                     ->label('Anzahl der Helfer')
-                    ->sortable()
                     ->alignRight(),
             ])
-            //->defaultSort('operationalLocation.einsatzort')
             ->defaultSort('startZeit')
             ->filters([
                 SelectFilter::make('event')
                     ->relationship('event', 'ueberschrift'),
                 SelectFilter::make('operationalLocation')
-                     ->relationship('operationalLocation', 'einsatzort')
+                    ->relationship('operationalLocation', 'einsatzort')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
