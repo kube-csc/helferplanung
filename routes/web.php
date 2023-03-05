@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('startseite');
-});
+Route::get('/', 'App\Http\Controllers\StartseitenController@getStartseitenDaten');
+Route::get('/Impressum', 'App\Http\Controllers\ImpressumController@getImpressumDaten');
+Route::get('/Information/Datenschutzerklärung', 'App\Http\Controllers\DatenschutzerklärungController@getDatenschutzerklärungDaten');
 
 Route::middleware([
     'auth:sanctum',
