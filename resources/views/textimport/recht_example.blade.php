@@ -1,6 +1,6 @@
 <h3>Bildmaterial von</h3>
 <p>
-    Fotolia: 867... - Spo.. - Whi.... © ta...
+    <a href="https://pixabay.com/illustrations/help-not-community-friends-globe-2574944/">pixabay.com</a>
 </p>
 <h3>Haftungsausschluss</h3>
 <h4>Haftung für Inhalt</h4>
