@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
@@ -57,6 +58,11 @@ class TimetabelHelperListsRelationManager extends RelationManager
                     ->minDate(now())
                     ->columnSpan(3)
                     ->required(),
+                TimePicker::make('laenge')
+                    ->label('Einsatzlänge (H:i)')
+                    ->withoutSeconds()
+                    ->columnSpan(3)
+                    ->required(),
                 TextInput::make('anzahlHelfer')
                     ->columnSpan(3)
                     ->label('Anzahl der Helfer')
@@ -82,6 +88,9 @@ class TimetabelHelperListsRelationManager extends RelationManager
                 TextColumn::make('endZeit')
                     ->label('Start Datum / Zeit')
                     ->dateTime('d.m.Y H:i')
+                    ->alignRight(),
+                TextColumn::make('laenge')
+                    ->dateTime('H:i')
                     ->alignRight(),
                 TextColumn::make('anzahlHelfer')
                     ->label('Anzahl der Helfer')

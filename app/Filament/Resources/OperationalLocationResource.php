@@ -59,13 +59,10 @@ class OperationalLocationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('einsatzort')
                 ->sortable(),
-                Tables\Columns\TextColumn::make('beschreibung')
-                ->limit(50)
-                ->tooltip(fn (Model $record): string => "{$record->beschreibung}")
             ])
             ->defaultSort('einsatzort')
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                //Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
