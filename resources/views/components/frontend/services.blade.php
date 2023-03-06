@@ -1,3 +1,6 @@
+@php
+  $delay=100;
+@endphp
 <!-- ======= Services Section ======= -->
 <section id="services" class="services">
     <div class="container">
@@ -12,17 +15,20 @@
               @if($loop->first)
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up">
-                        <h4 class="title"><a href="">{{ $event->ueberschrift }}</a></h4>
+                        <h4 class="title"><a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift }}</a></h4>
                         <p class="description">{{ $event->beschreibung }}</p>
                     </div>
                 </div>
               @else
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                        <h4 class="title"><a href="">{{ $event->ueberschrift }}</a></h4>
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+                        <h4 class="title"><a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift }}</a></h4>
                         <p class="description">{{ $event->beschreibung }}</p>
                     </div>
                 </div>
+              @php
+                  $delay=$delay+100;
+              @endphp
               @endif
           @endforeach
         </div>

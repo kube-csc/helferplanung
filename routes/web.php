@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\StartseitenController@getStartseitenDaten');
+Route::get('/Startseite', 'App\Http\Controllers\StartseitenController@getStartseitenDaten');
 Route::get('/Impressum', 'App\Http\Controllers\ImpressumController@getImpressumDaten');
 Route::get('/Information/Datenschutzerklärung', 'App\Http\Controllers\DatenschutzerklärungController@getDatenschutzerklärungDaten');
+Route::get('/Einsätze/{event_id}', 'App\Http\Controllers\EinsaetzeController@getEinsatätzeDaten');
 
 Route::middleware([
     'auth:sanctum',
