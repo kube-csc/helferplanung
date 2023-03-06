@@ -11,6 +11,7 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -53,15 +54,20 @@ class TimetabelHelperListResource extends Resource
                         DateTimePicker::make('startZeit')
                             ->label('Start Datum / Zeit')
                             ->withoutSeconds()
-                            ->displayFormat('d.m.Y h:m')
+                            ->displayFormat('d.m.Y H:i')
                             ->minDate(now())
                             ->columnSpan(3)
                             ->required(),
                         DateTimePicker::make('endZeit')
                             ->label('Start Datum / Zeit')
                             ->withoutSeconds()
-                            ->displayFormat('d.m.Y h:m')
+                            ->displayFormat('d.m.Y H:i')
                             ->minDate(now())
+                            ->columnSpan(3)
+                            ->required(),
+                        TimePicker::make('laenge')
+                            ->label('Einsatzlänge (H:i)')
+                            ->withoutSeconds()
                             ->columnSpan(3)
                             ->required(),
                         TextInput::make('anzahlHelfer')
@@ -93,6 +99,9 @@ class TimetabelHelperListResource extends Resource
                 TextColumn::make('endZeit')
                     ->label('Start Datum / Zeit')
                     ->dateTime('d.m.Y H:i')
+                    ->alignRight(),
+                TextColumn::make('laenge')
+                    ->dateTime('H:i')
                     ->alignRight(),
                 TextColumn::make('anzahlHelfer')
                     ->label('Anzahl der Helfer')

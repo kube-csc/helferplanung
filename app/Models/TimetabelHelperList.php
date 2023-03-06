@@ -9,6 +9,7 @@ class TimetabelHelperList extends Model
 {
     use SoftDeletes;
 
+    protected $connection = 'mysql';
     protected $guarded = [];
 
     public function event()

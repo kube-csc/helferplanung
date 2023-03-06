@@ -62,7 +62,6 @@ class EventResource extends Resource
                     ->searchable(),
                 TextColumn::make('datumvon')
                     ->label('von Datum')
-                    ->sortable()
                     ->dateTime('d.m.Y')
                     ->searchable(),
                 TextColumn::make('datumbis')
@@ -74,6 +73,7 @@ class EventResource extends Resource
                 BooleanColumn::make('regatta')
                     ->visibleFrom('md'),
             ])
+            ->defaultSort('datumvon' , 'DESC')
             ->filters([
                 Filter::make('regatta')
                     ->query(fn (Builder $query): Builder =>
