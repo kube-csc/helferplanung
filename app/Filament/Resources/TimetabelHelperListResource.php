@@ -8,7 +8,7 @@ use App\Models\OperationalLocation;
 use App\Models\TimetabelHelperList;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -51,32 +51,36 @@ class TimetabelHelperListResource extends Resource
                             ->required()
                             ->options(OperationalLocation::all()->pluck('einsatzort', 'id'))
                             ->searchable(),
-                        DateTimePicker::make('startZeit')
-                            ->label('Start Datum / Zeit')
-                            ->withoutSeconds()
-                            ->displayFormat('d.m.Y H:i')
-                            ->minDate(now())
-                            ->columnSpan(3)
-                            ->required(),
-                        DateTimePicker::make('endZeit')
-                            ->label('Start Datum / Zeit')
-                            ->withoutSeconds()
-                            ->displayFormat('d.m.Y H:i')
-                            ->minDate(now())
-                            ->columnSpan(3)
-                            ->required(),
-                        TimePicker::make('laenge')
-                            ->label('Einsatzlänge (H:i)')
-                            ->withoutSeconds()
-                            ->columnSpan(3)
-                            ->required(),
-                        TextInput::make('anzahlHelfer')
-                            ->columnSpan(3)
-                            ->label('Anzahl der Helfer')
-                            ->required()
-                            ->minValue('1')
-                            ->maxValue('5')
-                            ->numeric('true'),
+                         DatePicker::make('datum')
+                             ->label('Datum')
+                             ->displayFormat('d.m.Y')
+                             //->minDate(now())
+                             ->columnSpan(3)
+                             ->required(),
+                         TimePicker::make('startZeit')
+                             ->label('Start Zeit')
+                             ->withoutSeconds()
+                             ->displayFormat('H:i')
+                             ->columnSpan(3)
+                             ->required(),
+                         TimePicker::make('endZeit')
+                             ->label('End Zeit')
+                             ->withoutSeconds()
+                             ->displayFormat('H:i')
+                             ->columnSpan(3)
+                             ->required(),
+                         TimePicker::make('laenge')
+                             ->label('Einsatzlänge (H:M)')
+                             ->withoutSeconds()
+                             ->columnSpan(3)
+                             ->required(),
+                         TextInput::make('anzahlHelfer')
+                             ->columnSpan(3)
+                             ->label('Anzahl der Helfer')
+                             ->required()
+                             ->minValue('1')
+                             ->maxValue('5')
+                             ->numeric('true'),
                     ])
        );
     }

@@ -42,6 +42,9 @@
               </div>
 
               <div class="entry-content">
+                  <p>
+                      {!! $event->beschreibung !!}
+                  </p>
                 @php /*
                 <p>
                   Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
@@ -268,3 +271,4 @@
     </section><!-- End Blog Section -->
 
   </main><!-- End #main -->
+

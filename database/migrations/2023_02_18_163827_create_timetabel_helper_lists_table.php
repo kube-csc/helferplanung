@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('event_id')->constrained()->cascadeOnDelete();
             $table->foreignId('operational_location_id')->constrained()->cascadeOnDelete();
-            $table->dateTime('startZeit');
-            $table->dateTime('endZeit');
+            $table->date('datum');
+            $table->time('startZeit');
+            $table->time('endZeit');
             $table->time('laenge');
             $table->integer('anzahlHelfer');
             $table->SoftDeletes();

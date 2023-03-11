@@ -5,7 +5,7 @@ namespace App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use App\Models\OperationalLocation;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -23,7 +23,6 @@ class TimetabelHelperListsRelationManager extends RelationManager
     protected static ?string $modelLabel = 'Einsatzplan';
     protected static ?string $pluralModelLabel = 'Einsatzpläne';
     protected static string $relationship = 'TimetabelHelperLists';
-    protected static ?string $recordTitleAttribute = 'anzahlHelfer';
 
     public static function form(Form $form): Form
     {
@@ -44,22 +43,26 @@ class TimetabelHelperListsRelationManager extends RelationManager
                     ->required()
                     ->options(OperationalLocation::all()->pluck('einsatzort', 'id'))
                     ->searchable(),
-                DateTimePicker::make('startZeit')
-                    ->label('Start Datum / Zeit')
-                    ->withoutSeconds()
-                    ->displayFormat('d.m.Y h:m')
-                    ->minDate(now())
+                DatePicker::make('datum')
+                    ->label('Datum')
+                    ->displayFormat('d.m.Y')
+                    //->minDate(now())
                     ->columnSpan(3)
                     ->required(),
-                DateTimePicker::make('endZeit')
-                    ->label('Start Datum / Zeit')
+                TimePicker::make('startZeit')
+                    ->label('Start Zeit')
                     ->withoutSeconds()
-                    ->displayFormat('d.m.Y h:m')
-                    ->minDate(now())
+                    ->displayFormat('H:i')
+                    ->columnSpan(3)
+                    ->required(),
+                TimePicker::make('endZeit')
+                    ->label('End Zeit')
+                    ->withoutSeconds()
+                    ->displayFormat('H:i')
                     ->columnSpan(3)
                     ->required(),
                 TimePicker::make('laenge')
-                    ->label('Einsatzlänge (H:i)')
+                    ->label('Einsatzlänge (H:M)')
                     ->withoutSeconds()
                     ->columnSpan(3)
                     ->required(),
@@ -80,14 +83,19 @@ class TimetabelHelperListsRelationManager extends RelationManager
                 TextColumn::make('operationalLocation.einsatzort')
                     ->label('Einsatzort')
                     ->searchable(),
+                TextColumn::make('datum')
+                    ->label('Datum')
+                    ->dateTime('d.m.Y')
+                    ->sortable()
+                    ->alignRight(),
                 TextColumn::make('startZeit')
-                    ->label('Start Datum / Zeit')
-                    ->dateTime('d.m.Y H:i')
+                    ->label('Start Zeit')
+                    ->dateTime('H:i')
                     ->sortable()
                     ->alignRight(),
                 TextColumn::make('endZeit')
-                    ->label('Start Datum / Zeit')
-                    ->dateTime('d.m.Y H:i')
+                    ->label('End Zeit')
+                    ->dateTime('H:i')
                     ->alignRight(),
                 TextColumn::make('laenge')
                     ->dateTime('H:i')

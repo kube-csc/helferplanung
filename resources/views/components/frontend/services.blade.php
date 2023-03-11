@@ -12,18 +12,25 @@
         </div>
         <div class="row">
           @foreach ( $events as $event )
+                @php
+                    $delay=100;
+                    $ausgabetext=$event->beschreibung;
+                    $textlaenge=300;
+                    $abgeschnitten=0;
+                    textmax($ausgabetext,$textlaenge,$abgeschnitten);
+                @endphp
               @if($loop->first)
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up">
-                        <h4 class="title"><a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift }}</a></h4>
-                        <p class="description">{{ $event->beschreibung }}</p>
+                        <h4 class="title"><a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift  }}</a></h4>
+                        <p class="description">{!! $ausgabetext!!}</p>
                     </div>
                 </div>
               @else
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="{{ $delay }}">
                         <h4 class="title"><a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift }}</a></h4>
-                        <p class="description">{{ $event->beschreibung }}</p>
+                        <p class="description">{!! $ausgabetext !!}</p>
                     </div>
                 </div>
               @php
@@ -35,3 +42,17 @@
 
     </div>
 </section><!-- End Services Section -->
+
+@php
+    function textmax(&$beschreibung,$sollang,&$abgeschnitten)
+    {
+     $abgeschnitten=0;
+     $laenge=strlen($beschreibung);
+     if ($laenge>$sollang)
+      {
+        $beschreibung=substr($beschreibung,0,$sollang);
+        $beschreibung=$beschreibung."...";
+        $abgeschnitten=1;
+      }
+    }
+@endphp
