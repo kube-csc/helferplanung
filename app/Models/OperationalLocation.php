@@ -10,7 +10,4 @@ class OperationalLocation extends Model
     use SoftDeletes;
 
     protected $fillable = ['einsatzort', 'beschreibung', 'autor_id', 'bearbeiter_id', 'freigeber_id', 'letzteFreigabe'];
-
-    //protected $guarded = [];
-
 }

@@ -9,7 +9,6 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql_second';
     protected $guarded = [];
 
     public function TimetabelHelperLists()

@@ -9,7 +9,6 @@ class TimetabelHelperList extends Model
 {
     use SoftDeletes;
 
-    protected $connection = 'mysql';
     protected $guarded = [];
 
     public function event()
@@ -21,11 +20,4 @@ class TimetabelHelperList extends Model
     {
         return $this->belongsTo(OperationalLocation::class);
     }
-
-    /*
-    public function operationalLocation()
-    {
-        return $this->hasMany(OperationalLocation::class);
-    }
-    */
 }
