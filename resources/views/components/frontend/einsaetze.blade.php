@@ -85,12 +85,13 @@
                       <ul>
                   @endif
                       @php
-                          $startZeit=date('d.m.Y H:i', strtotime($timetabelHelperList->startZeit));
+                          $datum=date('d.m.Y', strtotime($timetabelHelperList->datum));
+                          $startZeit=date('H:i', strtotime($timetabelHelperList->startZeit));
                           $endZeit=date('H:i', strtotime($timetabelHelperList->endZeit));
                           $laenge=date('H:i', strtotime($timetabelHelperList->laenge));
                       @endphp
                     <li>
-                        {{$timetabelHelperList->anzahlHelfer}} Helfer in der {{ $startZeit }} Uhr von {{$endZeit}} Uhr für {{$laenge}} Stunden
+                        {{$timetabelHelperList->anzahlHelfer}} Helfer am {{ $datum }} in der Zeit von {{ $startZeit }} Uhr bis {{$endZeit}} Uhr mit einer Einsatzzeit von {{$laenge}} Stunden
                     </li>
                     @php /*
                     <img src="assets/img/blog-inside-post.jpg" class="img-fluid" alt="">
@@ -254,8 +255,16 @@
               <h3 class="sidebar-title">Einsatzorte</h3>
               <div class="sidebar-item categories">
                 <ul>
+                    @php
+                        $timetabelHelperListMerk="";
+                    @endphp
                     @foreach( $timetabelHelperLists as $timetabelHelperList)
-                       <li><a href="#{{ $timetabelHelperList->OperationalLocation->einsatzort }}">{{ $timetabelHelperList->OperationalLocation->einsatzort }}<span></span></a></li>
+                        @if($timetabelHelperListMerk<>$timetabelHelperList->OperationalLocation->einsatzort)
+                            <li><a href="#{{ $timetabelHelperList->OperationalLocation->einsatzort }}">{{ $timetabelHelperList->OperationalLocation->einsatzort }}<span></span></a></li>
+                        @endif
+                        @php
+                            $timetabelHelperListMerk=$timetabelHelperList->OperationalLocation->einsatzort;
+                        @endphp
                     @endforeach
                 </ul>
 

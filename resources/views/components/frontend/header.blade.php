@@ -10,7 +10,7 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="index.php">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <?php /*
                 <li><a href="#about">About Us</a></li>
                 */ ?>

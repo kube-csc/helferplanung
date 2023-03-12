@@ -95,14 +95,19 @@ class TimetabelHelperListResource extends Resource
                 TextColumn::make('operationalLocation.einsatzort')
                     ->label('Einsatzort')
                     ->searchable(),
+                TextColumn::make('datum')
+                    ->label('Datum')
+                    ->dateTime('d.m.Y')
+                    ->sortable()
+                    ->alignRight(),
                 TextColumn::make('startZeit')
-                    ->label('Start Datum / Zeit')
-                    ->dateTime('d.m.Y H:i')
+                    ->label('Start Zeit')
+                    ->dateTime('H:i')
                     ->sortable()
                     ->alignRight(),
                 TextColumn::make('endZeit')
-                    ->label('Start Datum / Zeit')
-                    ->dateTime('d.m.Y H:i')
+                    ->label('End Zeit')
+                    ->dateTime('H:i')
                     ->alignRight(),
                 TextColumn::make('laenge')
                     ->dateTime('H:i')
