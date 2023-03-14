@@ -34,9 +34,18 @@
               <div class="entry-meta">
                 <ul>
                   @php /* <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li> */
-                    $datum=date('d.m.Y', strtotime($event->datumvon));
+                    $datumvon=date('d.m.Y', strtotime($event->datumvon));
+                    $datumbis=date('d.m.Y', strtotime($event->datumbis));
+                    if($datumvon==$datumbis){
+                        $datumausgabe=$datumvon;
+                    }
+                    else{
+                        $datumausgabe='von '.$datumvon.' bis '.$datumbis;
+                    }
                   @endphp
-                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="/Einsätze/{{ $event->id }}"><time datetime="{{ $event->datumvon }}">{{ $datum }}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="/Einsätze/{{ $event->id }}">
+                          <time datetime="{{ $event->datumvon }}">{{ $datumausgabe }}</time></a>
+                  </li>
                   @php /* <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="blog-single.html">14 Comments</a></li>*/ @endphp
                 </ul>
               </div>
@@ -45,6 +54,7 @@
                   <p>
                       {!! $event->beschreibung !!}
                   </p>
+                  <h2>Einsatzplan</h2>
                 @php /*
                 <p>
                   Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
@@ -67,14 +77,50 @@
                 <p>
                   Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore provident voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta est suscipit perspiciatis. Voluptate ex rerum assumenda dolores nihil quaerat.
                 </p>
-                */ @endphp
+                */
+                @endphp
+
                 @php
                     $OperationalLocation="";
                 @endphp
                 @foreach( $timetabelHelperLists as $timetabelHelperList)
-                  @if($timetabelHelperList->OperationalLocation->einsatzort<>$OperationalLocation)
+                  @if($timetabelHelperList->OperationalLocation->id<>$OperationalLocation)
                       @if ($OperationalLocation <> "")
                         </ul>
+                          @if($key==date('d.m.Y' , strtotime($event->datumvon)))
+                              @php
+                              $freeOperationalplans = DB::table('timetabel_helper_lists')
+                                 ->where('event_id' , $event->id )
+                                 ->where('operational_location_id' , $OperationalLocation)
+                                 ->get();
+                              $datummerk="";
+                              @endphp
+                                @foreach($freeOperationalplans as $freeOperationalplan)
+                                   @php
+                                     $datum=date('d.m.Y' , strtotime($freeOperationalplan->datum));
+                                     $ai=date('H' , strtotime($freeOperationalplan->startZeit));
+                                     $di=date('H' , strtotime($freeOperationalplan->laenge));
+                                     $ei=date('H' , strtotime($freeOperationalplan->endZeit));
+                                   @endphp
+                                     @for($i = $ai; $i < $ei; $i=$i+$di)
+                                       @if($datummerk=="")
+                                          <div>
+                                       @else
+                                         @if($datummerk<>$datum)
+                                           </div>
+                                           <br>
+                                           <div>
+                                         @endif
+                                       @endif
+                                       <a class="btn btn-primary mb-lg-2" href="#" role="button">Helfer {{ $freeOperationalplan->anzahlHelfer }} {{ $datum }} {{ $i }} Uhr</a>
+                                       @php
+                                           $datummerk=$datum;
+                                       @endphp
+                                     @endfor
+                                @endforeach
+                                       </div>
+                              </p>
+                          @endif
                       @endif
                     <name id="{{ $timetabelHelperList->OperationalLocation->einsatzort }}"></name>
                     <h3>{{ $timetabelHelperList->OperationalLocation->einsatzort }}</h3>
@@ -97,11 +143,10 @@
                     <img src="assets/img/blog-inside-post.jpg" class="img-fluid" alt="">
                     */ @endphp
                     @php
-                      $OperationalLocation=$timetabelHelperList->OperationalLocation->einsatzort;
+                      $OperationalLocation=$timetabelHelperList->OperationalLocation->id;
                     @endphp
                 @endforeach
                      </ul>
-
               </div>
               @php /*
               <div class="entry-footer clearfix">

@@ -18,7 +18,7 @@ Route::get('/', 'App\Http\Controllers\StartseitenController@getStartseitenDaten'
 Route::get('/Startseite', 'App\Http\Controllers\StartseitenController@getStartseitenDaten');
 Route::get('/Impressum', 'App\Http\Controllers\ImpressumController@getImpressumDaten');
 Route::get('/Information/Datenschutzerklärung', 'App\Http\Controllers\DatenschutzerklärungController@getDatenschutzerklärungDaten');
-Route::get('/Einsätze/{event_id}', 'App\Http\Controllers\EinsaetzeController@getEinsaetzeDaten');
+Route::get('/Einsätze/{event_id}/{key}', 'App\Http\Controllers\EinsaetzeController@getEinsaetzeDaten');
 
 Route::middleware([
     'auth:sanctum',

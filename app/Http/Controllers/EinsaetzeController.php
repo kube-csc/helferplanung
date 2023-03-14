@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EinsaetzeController extends Controller
 {
-    public function getEinsaetzeDaten($event_id)
+    public function getEinsaetzeDaten($event_id, $key )
     {
         $event = Event::find($event_id);
 
@@ -20,7 +20,8 @@ class EinsaetzeController extends Controller
 
         return view('pages.einsaetze' , [
             'event' => $event,
-            'timetabelHelperLists' => $timetabelHelperLists
+            'timetabelHelperLists' => $timetabelHelperLists,
+            'key' => $key
         ]);
     }
 }

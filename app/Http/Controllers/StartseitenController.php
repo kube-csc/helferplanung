@@ -13,7 +13,7 @@ class StartseitenController extends Controller
 
         $events = Event::where('regatta' , '1')
                        ->where('datumbis' , '>=' , Carbon::now())
-                       ->orderBy('datumvon' , 'DESC')
+                       ->orderBy('datumvon')
                        ->get();
         $eventCount = $events->count();
 
@@ -26,6 +26,5 @@ class StartseitenController extends Controller
             'operatingPlans' => $operatingPlans,
             'operatingPlansCount' => $operatingPlansCount
         ]);
-
     }
 }
