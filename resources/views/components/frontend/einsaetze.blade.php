@@ -87,40 +87,7 @@
                   @if($timetabelHelperList->OperationalLocation->id<>$OperationalLocation)
                       @if ($OperationalLocation <> "")
                         </ul>
-                          @if($key==date('d.m.Y' , strtotime($event->datumvon)))
-                              @php
-                              $freeOperationalplans = DB::table('timetabel_helper_lists')
-                                 ->where('event_id' , $event->id )
-                                 ->where('operational_location_id' , $OperationalLocation)
-                                 ->get();
-                              $datummerk="";
-                              @endphp
-                                @foreach($freeOperationalplans as $freeOperationalplan)
-                                   @php
-                                     $datum=date('d.m.Y' , strtotime($freeOperationalplan->datum));
-                                     $ai=date('H' , strtotime($freeOperationalplan->startZeit));
-                                     $di=date('H' , strtotime($freeOperationalplan->laenge));
-                                     $ei=date('H' , strtotime($freeOperationalplan->endZeit));
-                                   @endphp
-                                     @for($i = $ai; $i < $ei; $i=$i+$di)
-                                       @if($datummerk=="")
-                                          <div>
-                                       @else
-                                         @if($datummerk<>$datum)
-                                           </div>
-                                           <br>
-                                           <div>
-                                         @endif
-                                       @endif
-                                       <a class="btn btn-primary mb-lg-2" href="#" role="button">Helfer {{ $freeOperationalplan->anzahlHelfer }} {{ $datum }} {{ $i }} Uhr</a>
-                                       @php
-                                           $datummerk=$datum;
-                                       @endphp
-                                     @endfor
-                                @endforeach
-                                       </div>
-                              </p>
-                          @endif
+                        @include('components.frontend.einsaetzebuchen')
                       @endif
                     <name id="{{ $timetabelHelperList->OperationalLocation->einsatzort }}"></name>
                     <h3>{{ $timetabelHelperList->OperationalLocation->einsatzort }}</h3>
@@ -147,6 +114,7 @@
                     @endphp
                 @endforeach
                      </ul>
+                     @include('components.frontend.einsaetzebuchen')
               </div>
               @php /*
               <div class="entry-footer clearfix">
