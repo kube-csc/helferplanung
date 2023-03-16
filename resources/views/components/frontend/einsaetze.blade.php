@@ -1,7 +1,6 @@
-
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
         <ol>
           <li><a href="/Startseite">Home</a></li>
@@ -9,12 +8,12 @@
         </ol>
         <h2>{{ $event->ueberschrift }}</h2>
 
-      </div>
-    </section><!-- End Breadcrumbs -->
+    </div>
+</section><!-- End Breadcrumbs -->
 
-    <!-- ======= Blog Section ======= -->
-    <section id="blog" class="blog">
-      <div class="container">
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+    <div class="container">
 
         <div class="row">
 
@@ -80,14 +79,14 @@
                 */
                 @endphp
 
-                @php
+               @php
                     $OperationalLocation="";
                 @endphp
                 @foreach( $timetabelHelperLists as $timetabelHelperList)
                   @if($timetabelHelperList->OperationalLocation->id<>$OperationalLocation)
                       @if ($OperationalLocation <> "")
                         </ul>
-                        @include('components.frontend.einsaetzebuchen')
+                        @include('components.frontend.freieEinsaetze')
                       @endif
                     <name id="{{ $timetabelHelperList->OperationalLocation->einsatzort }}"></name>
                     <h3>{{ $timetabelHelperList->OperationalLocation->einsatzort }}</h3>
@@ -95,7 +94,7 @@
                         {!! $timetabelHelperList->OperationalLocation->beschreibung !!}
                     </p>
                       Arbeitseinsätze:
-                      <ul>
+                     <ul>
                   @endif
                       @php
                           $datum=date('d.m.Y', strtotime($timetabelHelperList->datum));
@@ -104,7 +103,8 @@
                           $laenge=date('H:i', strtotime($timetabelHelperList->laenge));
                       @endphp
                     <li>
-                        {{$timetabelHelperList->anzahlHelfer}} Helfer am {{ $datum }} in der Zeit von {{ $startZeit }} Uhr bis {{$endZeit}} Uhr mit einer Einsatzzeit von {{$laenge}} Stunden
+                        {{$timetabelHelperList->anzahlHelfer}} Helfer am {{ $datum }} in der Zeit
+                         von {{ $startZeit }} Uhr bis {{$endZeit}} Uhr mit einer Einsatzzeit von {{$laenge}} Stunden
                     </li>
                     @php /*
                     <img src="assets/img/blog-inside-post.jpg" class="img-fluid" alt="">
@@ -114,7 +114,7 @@
                     @endphp
                 @endforeach
                      </ul>
-                     @include('components.frontend.einsaetzebuchen')
+                     @include('components.frontend.freieEinsaetze')
               </div>
               @php /*
               <div class="entry-footer clearfix">
@@ -289,8 +289,7 @@
 
         </div>
 
-      </div>
-    </section><!-- End Blog Section -->
+    </div>
+</section><!-- End Blog Section -->
 
-  </main><!-- End #main -->
-
+</main><!-- End #main -->

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +18,7 @@ Route::get('/Startseite', 'App\Http\Controllers\StartseitenController@getStartse
 Route::get('/Impressum', 'App\Http\Controllers\ImpressumController@getImpressumDaten');
 Route::get('/Information/Datenschutzerklärung', 'App\Http\Controllers\DatenschutzerklärungController@getDatenschutzerklärungDaten');
 Route::get('/Einsätze/{event_id}/{key}', 'App\Http\Controllers\EinsaetzeController@getEinsaetzeDaten');
+Route::get('/Einsätzebuchen/{Operationalplan_id}/{time}', 'App\Http\Controllers\OperationalBookingController@operationalBooking');
 
 Route::middleware([
     'auth:sanctum',

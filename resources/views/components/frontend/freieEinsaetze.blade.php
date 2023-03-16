@@ -1,4 +1,3 @@
-<!-- Anfang Einsätze buchen -->
 @if($key==date('d.m.Y' , strtotime($event->datumvon)))
     @php
         $freeOperationalplans = DB::table('timetabel_helper_lists')
@@ -23,23 +22,24 @@
                 $aih=date('H:i' , $i);
                 $eih=date('H:i' , $i+$dit);
                 $dih=date('H:i' , $dit);
+                if($i+$dit > $eit){
+                    $eih=date('H:i' , $eit);
+                }
             @endphp
             @if($datummerk=="")
                 <div>
-                    @else
-                        @if($datummerk<>$datum)
+            @else
+              @if($datummerk<>$datum)
                 </div>
                 <br>
                 <div>
-                    @endif
-                    @endif
-                    <a class="btn btn-primary mb-lg-2" href="#" role="button">Helfer {{ $freeOperationalplan->anzahlHelfer }} {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
-                    @php
-                        $datummerk=$datum;
-                    @endphp
-                    @endfor
-                    @endforeach
-                </div>
-                </p>
+              @endif
             @endif
-            <!-- Anfang Einsätze buchen Ende-->
+              <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $timetabelHelperList->id }}/{{ $i }}" role="button">{{ $freeOperationalplan->anzahlHelfer }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+              @php
+                  $datummerk=$datum;
+              @endphp
+       @endfor
+    @endforeach
+                </div>
+ @endif
