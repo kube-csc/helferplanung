@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EventSeeder::class);
         $this->call(OperationalLocationSeeder::class);
         $this->call(timetabelHelperListSeeder::class);
+        $this->call(OperationalBookingSeeder::class);
         $this->call(InstructionSeeder::class);
         //User::factory(1)->create();
 

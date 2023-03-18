@@ -17,8 +17,9 @@ Route::get('/', 'App\Http\Controllers\StartseitenController@getStartseitenDaten'
 Route::get('/Startseite', 'App\Http\Controllers\StartseitenController@getStartseitenDaten');
 Route::get('/Impressum', 'App\Http\Controllers\ImpressumController@getImpressumDaten');
 Route::get('/Information/Datenschutzerklärung', 'App\Http\Controllers\DatenschutzerklärungController@getDatenschutzerklärungDaten');
-Route::get('/Einsätze/{event_id}/{key}', 'App\Http\Controllers\EinsaetzeController@getEinsaetzeDaten');
-Route::get('/Einsätzebuchen/{Operationalplan_id}/{time}', 'App\Http\Controllers\OperationalBookingController@operationalBooking');
+Route::get('/Einsätze/{event_id}/{key}', 'App\Http\Controllers\EinsaetzeController@getEinsaetzeDaten')->name('einsaetze');
+Route::get('/Einsätzebuchen/{Operationalplan_id}/{operationalTime}', 'App\Http\Controllers\OperationalBookingController@create');
+Route::post('/Einsätzebuchen/speichern', 'App\Http\Controllers\OperationalBookingController@store');
 
 Route::middleware([
     'auth:sanctum',

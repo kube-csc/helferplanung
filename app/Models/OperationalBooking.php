@@ -11,13 +11,17 @@ class OperationalBooking extends Model
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
+        'Vorname',
+        'Nachname',
         'event_id',
         'operational_location_id',
         'timetabel_helper_lists_id',
         'user_id',
+        'email',
         'datum',
         'startZeit',
-        'endZeit',
+        'endZeit'
     ];
 }

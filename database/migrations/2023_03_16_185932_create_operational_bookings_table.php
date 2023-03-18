@@ -18,7 +18,11 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->cascadeOnDelete();
             $table->foreignId('operational_location_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('timetabel_helper_lists_id');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('Vorname');
+            $table->string('Nachname');
+            $table->string('email');
             $table->date('datum');
             $table->time('startZeit');
             $table->time('endZeit');

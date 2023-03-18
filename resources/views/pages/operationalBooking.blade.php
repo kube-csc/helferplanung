@@ -1,4 +1,4 @@
-@section('title' ,'Einsatzpläne buchen')
+@section('title' ,'Einsatze buchen')
 
 <x-frontend.layout>
 

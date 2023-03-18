@@ -35,7 +35,7 @@
                 <div>
               @endif
             @endif
-              <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $timetabelHelperList->id }}/{{ $i }}" role="button">{{ $freeOperationalplan->anzahlHelfer }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+              <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freeOperationalplan->anzahlHelfer }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
               @php
                   $datummerk=$datum;
               @endphp
