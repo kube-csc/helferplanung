@@ -1,4 +1,4 @@
-@section('ttitle' ,'Startseite')
+@section('title' ,'Startseite')
 
 <x-frontend.layout>
 

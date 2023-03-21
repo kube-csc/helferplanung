@@ -23,7 +23,7 @@
             <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
                 <div class="count-box">
                     <i class="icofont-food-cart"></i>
-                    <span data-toggle="counter-up"></span>
+                    <span data-toggle="counter-up">{{ $operatingBookCount }}</span>
                     <p><strong>Einsätze</strong><br>besetzte Einsätze</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
                 <div class="count-box">
                     <i class="icofont-users-alt-5"></i>
-                    <span data-toggle="counter-up"></span>
+                    <span data-toggle="counter-up">{{ $operatingBookUserCount }}</span>
                     <p><strong>Helfer</strong><br>aktive Helfer</p>
                 </div>
             </div>
