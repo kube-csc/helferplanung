@@ -94,8 +94,13 @@
 
             <div class="section-title" data-aos="fade-up" data-aos-delay="300">
               <p class="text-justify">
-                 Gebuchte Termine<br>
+                  @php
+                  /*
+                  ToDo: Was habe ich gebucht
+                  Gebuchte Termine<br>
                   kommt später
+                  */
+                  @endphp
               </p>
             </div>
         </div>

@@ -35,11 +35,17 @@
                 <div>
               @endif
             @endif
-              <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freeOperationalplan->anzahlHelfer }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
               @php
-                  $datummerk=$datum;
+                 $datummerk=$datum;
+                 $OperationalPlans = DB::table('operational_bookings')
+                           ->where('timetabel_helper_lists_id' , $freeOperationalplan->id)
+                           ->where('startZeit' , $aih);
+                 $freePlan=$freeOperationalplan->anzahlHelfer-$OperationalPlans ->count();
               @endphp
-       @endfor
+              @if($freePlan>0)
+                <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+              @endif
+        @endfor
     @endforeach
                 </div>
  @endif

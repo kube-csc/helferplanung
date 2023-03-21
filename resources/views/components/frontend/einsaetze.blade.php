@@ -103,8 +103,8 @@
                           $laenge=date('H:i', strtotime($timetabelHelperList->laenge));
                       @endphp
                     <li>
-                        {{$timetabelHelperList->anzahlHelfer}} Helfer am {{ $datum }} in der Zeit
-                         von {{ $startZeit }} Uhr bis {{$endZeit}} Uhr mit einer Einsatzzeit von {{$laenge}} Stunden
+                        {{ $timetabelHelperList->anzahlHelfer }} Helfer am {{ $datum }} in der Zeit
+                         von {{ $startZeit }} Uhr bis {{ $endZeit }} Uhr mit einer Einsatzzeit von {{ $laenge }} Stunden
                     </li>
                     @php /*
                     <img src="assets/img/blog-inside-post.jpg" class="img-fluid" alt="">
