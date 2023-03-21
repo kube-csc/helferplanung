@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OperationalBooking extends Model
 {
@@ -11,6 +12,7 @@ class OperationalBooking extends Model
      *
      * @var array<int, string>
      */
+    use SoftDeletes;
 
     protected $fillable = [
         'Vorname',
@@ -24,4 +26,14 @@ class OperationalBooking extends Model
         'startZeit',
         'endZeit'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function operationalLocation()
+    {
+        return $this->belongsTo(OperationalLocation::class);
+    }
 }

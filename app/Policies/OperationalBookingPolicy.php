@@ -18,7 +18,7 @@ class OperationalBookingPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->admin > 2;
     }
 
     /**
@@ -30,7 +30,7 @@ class OperationalBookingPolicy
      */
     public function view(User $user, OperationalBooking $operationalBooking)
     {
-        //
+        return $user->admin > 2;
     }
 
     /**
@@ -41,7 +41,7 @@ class OperationalBookingPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->admin > 2;
     }
 
     /**
@@ -53,7 +53,7 @@ class OperationalBookingPolicy
      */
     public function update(User $user, OperationalBooking $operationalBooking)
     {
-        //
+        return $user->admin > 2;
     }
 
     /**
@@ -65,7 +65,7 @@ class OperationalBookingPolicy
      */
     public function delete(User $user, OperationalBooking $operationalBooking)
     {
-        //
+        return $user->admin > 2;
     }
 
     /**
@@ -77,7 +77,7 @@ class OperationalBookingPolicy
      */
     public function restore(User $user, OperationalBooking $operationalBooking)
     {
-        //
+        return $user->admin > 2;
     }
 
     /**
@@ -89,6 +89,6 @@ class OperationalBookingPolicy
      */
     public function forceDelete(User $user, OperationalBooking $operationalBooking)
     {
-        //
+        return $user->admin > 2;
     }
 }
