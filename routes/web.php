@@ -20,6 +20,8 @@ Route::get('/Information/Datenschutzerklärung', 'App\Http\Controllers\Datenschu
 Route::get('/Einsätze/{event_id}/{key}', 'App\Http\Controllers\EinsaetzeController@getEinsaetzeDaten')->name('einsaetze');
 Route::get('/Einsätzebuchen/{Operationalplan_id}/{operationalTime}', 'App\Http\Controllers\OperationalBookingController@create');
 Route::post('/Einsätzebuchen/speichern', 'App\Http\Controllers\OperationalBookingController@store');
+Route::get('/HelferlisteLogin', 'App\Http\Controllers\HelperListController@emailLogin');
+Route::post('/Helferliste', 'App\Http\Controllers\HelperListController@loginCheck');
 
 Route::middleware([
     'auth:sanctum',

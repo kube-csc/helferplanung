@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\OperationalBooking;
 use App\Models\TimetabelHelperList;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class StartseitenController extends Controller
@@ -19,7 +18,6 @@ class StartseitenController extends Controller
         $eventCount = $events->count();
 
         $operatingPlans = TimetabelHelperList::where('startZeit' , '>=' , Carbon::now());
-        //$operatingPlansCount = $operatingPlans->count();
 
         $operatingPlansCount=0;
         foreach($events as $event) {
@@ -52,10 +50,9 @@ class StartseitenController extends Controller
             'events' => $events,
             'eventCount' => $eventCount,
             'operatingPlans' => $operatingPlans,
-            'operatingPlansCount' => $operatingPlansCount,
+            'operatingPlansCount' => $operatingPlansCount-$operatingBookCount,
             'operatingBookCount'  => $operatingBookCount,
-            'operatingBookUserCount' => $operatingBookUserCount,
-            'operatingBookUsers' =>$operatingBookUsers
+            'operatingBookUserCount' => $operatingBookUserCount
         ]);
     }
 }
