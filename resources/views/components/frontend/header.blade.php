@@ -15,6 +15,7 @@
                 <li><a href="#about">About Us</a></li>
                 */ ?>
                 <li><a href="#services">Events</a></li>
+                <li><a href="/HelferlisteLogin">Helferlisten</a></li>
                 <?php /*
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#team">Team</a></li>

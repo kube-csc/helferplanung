@@ -43,8 +43,6 @@
                                 <button type="submit" class="btn btn-primary">Einsatz buchen</button>
                             </div>
                         </form>
-                        <br>
-                        <button type="button" class="btn btn-primary"><a href="">Zurück</a></button>
                         </p>
                     </div>
                 </div>
