@@ -30,7 +30,34 @@ class HelperListController extends Controller
             return view('pages.emailLoginFale');
         }
         return view('pages.helferList' , [
-                     'OperationalBookings' => $OperationalBookings
+                     'OperationalBookings' => $OperationalBookings,
+                     'loginEmail'          => $Request->loginEmail
         ]);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\OperationalBooking  $operationalBooking
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($operationalBookings_id)
+    {
+      //
+    }
+
+    public function softDelete($operationalBookings_id)
+    {
+        $OperationalBooking=OperationalBooking::find($operationalBookings_id);
+        $delete = OperationalBooking::find($operationalBookings_id)->delete();
+        return view('pages.emailLogin')->with(
+            [
+                'datum'   => $OperationalBooking->event->ueberschrift,
+                'endZeit' => $OperationalBooking->endZeit,
+                'endZeit' => $OperationalBooking->endZeit,
+                'success' => 'Der gebuchte Termin wurde storniert.'
+            ]
+        );
+    }
+
 }

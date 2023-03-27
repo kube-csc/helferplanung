@@ -27,6 +27,8 @@ class OperationalBooking extends Model
         'endZeit'
     ];
 
+    protected $dates = [ 'deleted_at' ];
+
     public function event()
     {
         return $this->belongsTo(Event::class);

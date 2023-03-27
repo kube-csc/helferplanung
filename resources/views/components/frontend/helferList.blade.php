@@ -56,7 +56,11 @@
                                 @if($startZeitMerk<>$startZeit)
                                      <h4>bis {{ $startZeit }} von {{ $endZeit }}</h4>
                                 @endif
-                                {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
+                                @if($loginEmail==$OperationalBooking->email)
+                                    <a class="btn btn-primary mb-lg-2" href="/Einsatz/löschen/{{$OperationalBooking->id}}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
+                                @else
+                                    {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
+                                @endif
                             @php
                                 $eventIdMerk=$OperationalBooking->event_id;
                                 $einsatzortMerk=$OperationalBooking->operational_location_id;
