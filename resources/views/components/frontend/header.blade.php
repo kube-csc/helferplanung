@@ -15,7 +15,11 @@
                 <li><a href="#about">About Us</a></li>
                 */ ?>
                 <li><a href="#services">Events</a></li>
-                <li><a href="/HelferlisteLogin">Helferlisten</a></li>
+                @if(isset($_COOKIE['email']))
+                   <li><a href="/Helferliste/anzeigen">Helferlisten</a></li>
+                @else
+                   <li><a href="/HelferlisteLogin">Helferlisten</a></li>
+                @endif
                 <?php /*
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#team">Team</a></li>

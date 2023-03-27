@@ -24,7 +24,9 @@
                     @php
                         //ToDo: Beschreibung bearbeiten
                     @endphp
-
+                    @if (session()->has('success'))
+                     {!! session('success') !!}
+                    @endif
                 </p>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="200">
@@ -38,6 +40,13 @@
                                 <label for="loginEmail">Email Adresse</label>
                                 <input type="loginEmail" id="loginEmail" name="loginEmail" class="form-control" placeholder="Email address" value="{{ old('loginEmail') }}" required autofocus>
                             </div>
+                          @if(!isset($_COOKIE['cookie_consent']))
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" name="inputAngemeldet" value="remember-me"> Angemeldet bleiben
+                                </label>
+                            </div>
+                          @endif
                             <br>
                             <div>
                                 <button type="submit" class="btn btn-primary">Einsatz buchen</button>

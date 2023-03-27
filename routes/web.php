@@ -22,6 +22,7 @@ Route::get('/Einsätzebuchen/{Operationalplan_id}/{operationalTime}', 'App\Http\
 Route::post('/Einsätzebuchen/speichern', 'App\Http\Controllers\OperationalBookingController@store');
 Route::get('/HelferlisteLogin', 'App\Http\Controllers\HelperListController@emailLogin');
 Route::post('/Helferliste', 'App\Http\Controllers\HelperListController@loginCheck');
+Route::get('/Helferliste/anzeigen', 'App\Http\Controllers\HelperListController@login');
 Route::get('/Einsatz/löschen/{operationalBookings_id}', 'App\Http\Controllers\HelperListController@softDelete');
 
 Route::middleware([

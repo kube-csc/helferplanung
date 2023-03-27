@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHelperListRequest;
 use App\Models\OperationalBooking;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+
 
 class HelperListController extends Controller
 {
@@ -19,6 +19,12 @@ class HelperListController extends Controller
         $OperationalBookingCount=OperationalBooking::where('email' , $Request->loginEmail)
             ->where('datum', '>=' , Carbon::now())
             ->count();
+
+        if($Request->loginEmail<>"" and $Request->inputAngemeldet=="remember-me" and !isset($_COOKIE['cookie_consent'])) {
+            $minutes = time()+(86400 * 365); //86400=1day
+            setcookie('email', $Request->loginEmail, $minutes, "/");
+        }
+
         if($OperationalBookingCount>0) {
             $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
                 ->orderBy('datum')
@@ -32,6 +38,20 @@ class HelperListController extends Controller
         return view('pages.helferList' , [
                      'OperationalBookings' => $OperationalBookings,
                      'loginEmail'          => $Request->loginEmail
+        ]);
+    }
+
+    public function login()
+    {
+         $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
+                ->orderBy('datum')
+                ->orderBy('operational_location_id')
+                ->orderBy('startZeit')
+                ->get();
+
+        return view('pages.helferList' , [
+            'OperationalBookings' => $OperationalBookings,
+            'loginEmail'          => $_COOKIE['email']
         ]);
     }
 
@@ -50,14 +70,30 @@ class HelperListController extends Controller
     {
         $OperationalBooking=OperationalBooking::find($operationalBookings_id);
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
-        return view('pages.emailLogin')->with(
-            [
-                'datum'   => $OperationalBooking->event->ueberschrift,
-                'endZeit' => $OperationalBooking->endZeit,
-                'endZeit' => $OperationalBooking->endZeit,
-                'success' => 'Der gebuchte Termin wurde storniert.'
-            ]
-        );
+
+        if(!isset($_COOKIE['email'])){
+            return view('pages.emailLogin')->with(
+                [
+                    'datum' => $OperationalBooking->event->ueberschrift,
+                    'endZeit' => $OperationalBooking->endZeit,
+                    'endZeit' => $OperationalBooking->endZeit,
+                    'success' => 'Der gebuchte Termin wurde storniert.'
+                ]
+            );
+        }
+        else {
+            $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
+                ->orderBy('datum')
+                ->orderBy('operational_location_id')
+                ->orderBy('startZeit')
+                ->get();
+
+            return view('pages.helferList' , [
+                    'OperationalBookings' => $OperationalBookings,
+                    'loginEmail'          => $_COOKIE['email']
+                ]
+            );
+        }
     }
 
 }
