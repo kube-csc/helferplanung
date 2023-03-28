@@ -21,10 +21,7 @@
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                 <h2>Helferliste</h2>
                 <p class="text-justify">
-                    @php
-                        //ToDo: Beschreibung bearbeiten
-                    @endphp
-
+                    Es können gebuchte Einsatze storniert werden.
                 </p>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="200">
@@ -57,7 +54,7 @@
                                      <h4>bis {{ $startZeit }} von {{ $endZeit }}</h4>
                                 @endif
                                 @if($loginEmail==$OperationalBooking->email)
-                                    <a class="btn btn-primary mb-lg-2" href="/Einsatz/löschen/{{$OperationalBooking->id}}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
+                                    <a class="btn btn-primary mb-lg-2" href="/Einsatz/löschen/{{ $OperationalBooking->id }}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
                                 @else
                                     {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
                                 @endif

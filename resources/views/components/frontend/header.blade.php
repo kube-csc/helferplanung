@@ -13,12 +13,13 @@
                 <li class="active"><a href="/">Home</a></li>
                 <?php /*
                 <li><a href="#about">About Us</a></li>
-                */ ?>
                 <li><a href="#services">Events</a></li>
-                @if(isset($_COOKIE['email']))
-                   <li><a href="/Helferliste/anzeigen">Helferlisten</a></li>
+                */ ?>
+                @if(isset($_COOKIE['log_remember']))
+                   <li><a href="/Helferliste">Helferlisten</a></li>
+                   <li><a href="/Abmelden">Abmelden</a></li>
                 @else
-                   <li><a href="/HelferlisteLogin">Helferlisten</a></li>
+                    <li><a href="/Anmelden">Anmelden</a></li>
                 @endif
                 <?php /*
                 <li><a href="#portfolio">Portfolio</a></li>

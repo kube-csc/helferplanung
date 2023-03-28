@@ -13,17 +13,23 @@
         <div class="row">
           @foreach ( $events as $event )
                 @php
-                    $delay=100;
                     $ausgabetext=$event->beschreibung;
                     $textlaenge=300;
                     $abgeschnitten=0;
                     textmax($ausgabetext,$textlaenge,$abgeschnitten);
+                    $datum=date('d.m.Y' , strtotime($event->datumvon));
                 @endphp
               @if($loop->first)
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up">
-                        <h4 class="title"><a href="/Einsätze/{{ $event->id }}/0">{{ $event->ueberschrift  }}</a></h4>
-                        <p class="description">{!! $ausgabetext!!}</p>
+                        <h4 class="title">
+                            @if(isset($_COOKIE['log_remember']))
+                                <a href="/Einsätze/{{ $event->id }}/{{ $datum }}">{{ $event->ueberschrift }}</a>
+                            @else
+                                <a href="/Einsätze/{{ $event->id }}/0">{{ $event->ueberschrift }}</a>
+                            @endif
+                        </h4>
+                        <p class="description">{!! $ausgabetext !!}</p>
                     </div>
                 </div>
               @else

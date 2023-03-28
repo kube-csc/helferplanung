@@ -9,10 +9,6 @@ use Illuminate\Support\Carbon;
 
 class HelperListController extends Controller
 {
-    public function emailLogin()
-    {
-        return view('pages.emailLogin');
-    }
 
     public function loginCheck(StoreHelperListRequest $Request)
     {
@@ -22,7 +18,7 @@ class HelperListController extends Controller
 
         if($Request->loginEmail<>"" and $Request->inputAngemeldet=="remember-me" and !isset($_COOKIE['cookie_consent'])) {
             $minutes = time()+(86400 * 365); //86400=1day
-            setcookie('email', $Request->loginEmail, $minutes, "/");
+            setcookie('log_remember', $Request->loginEmail, $minutes, "/");
         }
 
         if($OperationalBookingCount>0) {
@@ -41,17 +37,17 @@ class HelperListController extends Controller
         ]);
     }
 
-    public function login()
+    public function helperList()
     {
-         $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
-                ->orderBy('datum')
-                ->orderBy('operational_location_id')
-                ->orderBy('startZeit')
-                ->get();
+        $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
+            ->orderBy('datum')
+            ->orderBy('operational_location_id')
+            ->orderBy('startZeit')
+            ->get();
 
         return view('pages.helferList' , [
             'OperationalBookings' => $OperationalBookings,
-            'loginEmail'          => $_COOKIE['email']
+            'loginEmail'          => $_COOKIE['log_remember']
         ]);
     }
 
@@ -71,7 +67,7 @@ class HelperListController extends Controller
         $OperationalBooking=OperationalBooking::find($operationalBookings_id);
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
 
-        if(!isset($_COOKIE['email'])){
+        if(!isset($_COOKIE['log_remember'])){
             return view('pages.emailLogin')->with(
                 [
                     'datum' => $OperationalBooking->event->ueberschrift,
@@ -88,9 +84,12 @@ class HelperListController extends Controller
                 ->orderBy('startZeit')
                 ->get();
 
+            $minutes = time()+(86400 * 365); //86400=1day
+            setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");
+
             return view('pages.helferList' , [
                     'OperationalBookings' => $OperationalBookings,
-                    'loginEmail'          => $_COOKIE['email']
+                    'loginEmail'          => $_COOKIE['log_remember']
                 ]
             );
         }
