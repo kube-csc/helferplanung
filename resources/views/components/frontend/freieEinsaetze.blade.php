@@ -39,13 +39,41 @@
                  $datummerk=$datum;
                  $OperationalPlans = DB::table('operational_bookings')
                            ->where('timetabel_helper_lists_id' , $freeOperationalplan->id)
-                           ->where('startZeit' , $aih);
+                           ->where('startZeit' , $aih)
+                           ->where('deleted_at' , Null);
                  $freePlan=$freeOperationalplan->anzahlHelfer-$OperationalPlans ->count();
               @endphp
+
               @if($freePlan>0)
-                <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+                @if($noData==1)
+                    <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/direkt/{{ $freeOperationalplan->id }}/{{ $freeOperationalplan->datum }}/{{ $aih }}/{{ $eih }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+                @else
+                   <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+               @endif
               @endif
         @endfor
     @endforeach
+                  @if(isset($_COOKIE['log_remember']))
+                    @php
+                    $OperationalBookingBockeds=DB::table('operational_bookings')
+                        ->where('email' , $_COOKIE['log_remember'])
+                        ->where('operational_location_id', $freeOperationalplan->operational_location_id)
+                        ->where('deleted_at' , Null)
+                        ->orderBy('datum')
+                        ->orderBy('startZeit')
+                        ->get();
+                    @endphp
+                    @if($OperationalBookingBockeds->count()>0)
+                            <p>Meine gebuchten Einsätze:</p>
+                    @endif
+                    @foreach($OperationalBookingBockeds as $OperationalBookingBocked)
+                        @php
+                            $datumBocked     = date('d.m.' , strtotime($OperationalBookingBocked->datum));
+                            $startZeitBocked = date('H.i.' , strtotime($OperationalBookingBocked->startZeit));
+                            $endZeitBocked   = date('H.i.' , strtotime($OperationalBookingBocked->endZeit));
+                        @endphp
+                        <a class="btn btn-primary mb-lg-2" href="/Einsatz/stornieren/{{$OperationalBookingBocked->id}}" role="button">{{ $datumBocked }} von {{ $startZeitBocked }} bis {{ $endZeitBocked }} Uhr</a>
+                    @endforeach
+                  @endif
                 </div>
  @endif

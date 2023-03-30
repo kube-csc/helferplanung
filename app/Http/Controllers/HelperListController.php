@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHelperListRequest;
+use App\Models\Event;
 use App\Models\OperationalBooking;
 use Illuminate\Support\Carbon;
 
 
 class HelperListController extends Controller
 {
-
     public function loginCheck(StoreHelperListRequest $Request)
     {
         $OperationalBookingCount=OperationalBooking::where('email' , $Request->loginEmail)
@@ -67,32 +67,28 @@ class HelperListController extends Controller
         $OperationalBooking=OperationalBooking::find($operationalBookings_id);
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
 
-        if(!isset($_COOKIE['log_remember'])){
-            return view('pages.emailLogin')->with(
-                [
-                    'datum' => $OperationalBooking->event->ueberschrift,
-                    'endZeit' => $OperationalBooking->endZeit,
-                    'endZeit' => $OperationalBooking->endZeit,
-                    'success' => 'Der gebuchte Termin wurde storniert.'
-                ]
-            );
-        }
-        else {
-            $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
-                ->orderBy('datum')
-                ->orderBy('operational_location_id')
-                ->orderBy('startZeit')
-                ->get();
-
-            $minutes = time()+(86400 * 365); //86400=1day
+        $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
+        if($OperationalBookingCount>0) {
+            $minutes = time() + (86400 * 365); //86400=1day
             setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");
 
             return view('pages.helferList' , [
-                    'OperationalBookings' => $OperationalBookings,
-                    'loginEmail'          => $_COOKIE['log_remember']
-                ]
-            );
+                'OperationalBookings' => $OperationalBookings,
+                'loginEmail'          => $_COOKIE['log_remember']
+            ]);
+        }
+        else
+        {
+            setcookie('log_remember', '', time()-1);
+
+            $event=Event::find($OperationalBooking->event_id);
+            $datumvon=date('d.m.Y', strtotime($event->datumvon));
+
+            return to_route('einsaetze' , [
+                'event_id' => $OperationalBooking->event_id,
+                'key'      => $datumvon,
+                'noData'   => 1
+            ]);
         }
     }
-
 }

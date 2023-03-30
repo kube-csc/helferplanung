@@ -22,6 +22,9 @@ Route::get('/Einsätze/{event_id}/{key}', 'App\Http\Controllers\EinsaetzeControl
 Route::get('/Einsätzebuchen/{Operationalplan_id}/{operationalTime}', 'App\Http\Controllers\OperationalBookingController@create');
 Route::post('/Einsätzebuchen/speichern', 'App\Http\Controllers\OperationalBookingController@store');
 
+Route::get('/Einsätzebuchen/direkt/{Operationalplan_id}/{datum}/{ah}/{eh}', 'App\Http\Controllers\OperationalBookingController@createDirekt');
+Route::get('/Einsatz/stornieren/{operationalBookings_id}', 'App\Http\Controllers\OperationalBookingController@softDeleteDirekt');
+
 Route::get('/Helferliste', 'App\Http\Controllers\HelperListController@helperList');
 Route::get('/Einsatz/löschen/{operationalBookings_id}', 'App\Http\Controllers\HelperListController@softDelete');
 Route::post('/Helferliste/Login', 'App\Http\Controllers\HelperListController@loginCheck');
