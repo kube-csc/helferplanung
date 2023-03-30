@@ -45,7 +45,7 @@
               @endphp
 
               @if($freePlan>0)
-                @if($noData==1)
+                @if($noData==0)
                     <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/direkt/{{ $freeOperationalplan->id }}/{{ $freeOperationalplan->datum }}/{{ $aih }}/{{ $eih }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
                 @else
                    <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>

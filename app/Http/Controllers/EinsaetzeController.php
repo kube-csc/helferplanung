@@ -22,7 +22,7 @@ class EinsaetzeController extends Controller
         $noData=1;
         if(isset($_COOKIE['log_remember'])) {
             $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
-            if($OperationalBookingCount==0){
+            if($OperationalBookingCount>0){
                 $noData=0;
             }
         }
