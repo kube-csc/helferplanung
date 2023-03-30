@@ -12,7 +12,8 @@
         "laravel/jetstream": "^3.0",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.11"
+        "livewire/livewire": "^2.11",
+        "statikbe/laravel-cookie-consent": "^1.5"
     },
     "require-dev": {
         "doctrine/dbal": "^3.6",
