@@ -16,7 +16,7 @@ class HelperListController extends Controller
             ->where('datum', '>=' , Carbon::now())
             ->count();
 
-        if($Request->loginEmail<>"" and $Request->inputAngemeldet=="remember-me" and !isset($_COOKIE['cookie_consent'])) {
+        if($Request->loginEmail<>"" and $Request->inputAngemeldet=="remember-me" and !isset($_COOKIE['__cookie_consent'])) {
             $minutes = time()+(86400 * 365); //86400=1day
             setcookie('log_remember', $Request->loginEmail, $minutes, "/");
         }
@@ -67,7 +67,10 @@ class HelperListController extends Controller
         $OperationalBooking=OperationalBooking::find($operationalBookings_id);
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
 
-        $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
+        $OperationalBookingCount=0;
+        if(!isset($_COOKIE['log_remember'])) {
+            $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
+        }
         if($OperationalBookingCount>0) {
             $minutes = time() + (86400 * 365); //86400=1day
             setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");

@@ -164,15 +164,18 @@ class OperationalBookingController extends Controller
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
 
         $noData=0;
-        $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
-        if($OperationalBookingCount>0) {
-            $minutes = time() + (86400 * 365); //86400=1day
-            setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");
-        }
-        else
-        {
-            setcookie('log_remember', '', time()-1);
-            $noData=1;
+
+        if(!isset($_COOKIE['log_remember'])) {
+            $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
+            if ($OperationalBookingCount > 0) {
+                if (!isset($_COOKIE['__cookie_consent'])) {
+                    $minutes = time() + (86400 * 365); //86400=1day
+                    setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");
+                }
+            } else {
+                setcookie('log_remember', '', time() - 1);
+                $noData = 1;
+            }
         }
 
         return to_route('einsaetze' , [
