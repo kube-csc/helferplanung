@@ -76,7 +76,8 @@
             All Rights Reserved
         </div>
         <div class="credits">
-            <a href="/Information/Datenschutzerklärung">Datenschutzerklärung</a> | <a href="/Impressum">Impressum</a>
+            <a href="/Information/Datenschutzerklärung">Datenschutzerklärung</a> | <a href="/Impressum">Impressum</a><br>
+            <a href="javascript:void(0)" class="js-lcc-settings-toggle">@lang('cookie-consent::texts.alert_settings')</a>
         </div>
     </div>
 </footer><!-- End Footer -->

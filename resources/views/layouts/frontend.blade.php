@@ -28,6 +28,7 @@
     <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
     <link href="/assets/vendor/owl.carousel//assets/owl.carousel.min.css" rel="stylesheet">
     <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
@@ -68,6 +69,8 @@
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
+
+@include('cookie-consent::index');
 
 </body>
 
