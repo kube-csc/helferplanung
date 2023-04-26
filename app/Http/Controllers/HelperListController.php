@@ -68,13 +68,15 @@ class HelperListController extends Controller
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
 
         $OperationalBookingCount=0;
-        if(!isset($_COOKIE['log_remember'])) {
-            $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
+        if(isset($_COOKIE['log_remember'])) {
+            $OperationalBookings = OperationalBooking::where('email', $_COOKIE['log_remember'])
+                ->where('datum', '>=' , Carbon::now())
+                ->get();
+            $OperationalBookingCount = $OperationalBookings->count();
         }
         if($OperationalBookingCount>0) {
             $minutes = time() + (86400 * 365); //86400=1day
             setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");
-
             return view('pages.helferList' , [
                 'OperationalBookings' => $OperationalBookings,
                 'loginEmail'          => $_COOKIE['log_remember']
@@ -83,7 +85,6 @@ class HelperListController extends Controller
         else
         {
             setcookie('log_remember', '', time()-1);
-
             $event=Event::find($OperationalBooking->event_id);
             $datumvon=date('d.m.Y', strtotime($event->datumvon));
 

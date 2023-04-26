@@ -64,15 +64,18 @@
                         ->get();
                     @endphp
                     @if($OperationalBookingBockeds->count()>0)
-                            <p>Meine gebuchten Einsätze:</p>
+                            <p>
+                                Meine gebuchten Einsätze:<br>
+                                Durch klicken auf ein gebuchten Einsatzes wird die Buchung storniert.
+                            </p>
                     @endif
                     @foreach($OperationalBookingBockeds as $OperationalBookingBocked)
                         @php
                             $datumBocked     = date('d.m.' , strtotime($OperationalBookingBocked->datum));
-                            $startZeitBocked = date('H.i.' , strtotime($OperationalBookingBocked->startZeit));
-                            $endZeitBocked   = date('H.i.' , strtotime($OperationalBookingBocked->endZeit));
+                            $startZeitBocked = date('H:i' , strtotime($OperationalBookingBocked->startZeit));
+                            $endZeitBocked   = date('H:i' , strtotime($OperationalBookingBocked->endZeit));
                         @endphp
-                        <a class="btn btn-primary mb-lg-2" href="/Einsatz/stornieren/{{$OperationalBookingBocked->id}}" role="button">{{ $datumBocked }} von {{ $startZeitBocked }} bis {{ $endZeitBocked }} Uhr</a>
+                        <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/stornieren/{{$OperationalBookingBocked->id}}" role="button">{{ $datumBocked }} von {{ $startZeitBocked }} bis {{ $endZeitBocked }} Uhr</a>
                     @endforeach
                   @endif
                 </div>

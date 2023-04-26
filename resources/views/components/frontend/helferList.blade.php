@@ -13,7 +13,7 @@
         </div>
     </section><!-- End Breadcrumbs Section -->
 
-    <?php // ToDo: Beschreibungen in Beschreibungen anpassen ?>
+    <?php // ToDo: Beschreibungen in anpassen ?>
         <!-- ======= Anfahrt Section ======= -->
     <?php  /*<section class="inner-page">  */?>
     <section id="about" class="about">
@@ -21,7 +21,7 @@
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                 <h2>Helferliste</h2>
                 <p class="text-justify">
-                    Es können gebuchte Einsatze storniert werden.
+                    Es können gebuchte Einsatze storniert werden. Du must einfach auf den Button deines Einsatzes klicken.
                 </p>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="200">
@@ -54,7 +54,7 @@
                                      <h4>bis {{ $startZeit }} von {{ $endZeit }}</h4>
                                 @endif
                                 @if($loginEmail==$OperationalBooking->email)
-                                    <a class="btn btn-primary mb-lg-2" href="/Einsatz/löschen/{{ $OperationalBooking->id }}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
+                                    <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/löschen/{{ $OperationalBooking->id }}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
                                 @else
                                     {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
                                 @endif
