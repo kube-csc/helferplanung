@@ -38,19 +38,12 @@
                             @csrf
                             <div class="form-label-group">
                                 <label for="loginEmail">Email Adresse</label>
+                                <br>
                                 <input type="loginEmail" id="loginEmail" name="loginEmail" class="form-control" placeholder="Email" value="{{ old('loginEmail') }}" required autofocus>
                             </div>
-                          @if(!isset($_COOKIE['cookie_consent']))
-                            <br>
-                            <div class="checkbox mb-3">
-                                <label>
-                                    <input type="checkbox" name="inputAngemeldet" value="remember-me"> Angemeldet bleiben
-                                </label>
-                            </div>
-                          @endif
                             <br>
                             <div>
-                                <button type="submit" class="btn btn-primary">Einsatz buchen</button>
+                                <button type="submit" class="btn btn-primary">anmelden</button>
                             </div>
                         </form>
                         </p>

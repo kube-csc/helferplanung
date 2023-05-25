@@ -1,13 +1,12 @@
 <!-- ======= Breadcrumbs ======= -->
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
-
-        <ol>
+        <div class="d-flex justify-content-between align-items-center">
+         <h2>{{ $event->ueberschrift }}</h2>
+         <ol>
           <li><a href="/Startseite">Home</a></li>
-          <li><a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift }}</a></li>
+          <li>{{ $event->ueberschrift }}</li>
         </ol>
-        <h2>{{ $event->ueberschrift }}</h2>
-
     </div>
 </section><!-- End Breadcrumbs -->
 
@@ -27,7 +26,9 @@
               </div>
               */ @endphp
               <h2 class="entry-title">
-                <a href="/Einsätze/{{ $event->id }}">{{ $event->ueberschrift }}</a>
+                <?php /* <a href="/Einsätze/{{ $event->id }}/0"> */?>
+                    {{ $event->ueberschrift }}
+                <?php /*  </a>*/?>
               </h2>
 
               <div class="entry-meta">
@@ -42,17 +43,16 @@
                         $datumausgabe='von '.$datumvon.' bis '.$datumbis;
                     }
                   @endphp
-                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="/Einsätze/{{ $event->id }}">
-                          <time datetime="{{ $event->datumvon }}">{{ $datumausgabe }}</time></a>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i>
+                      <?php /* <a href="/Einsätze/{{ $event->id }}/0"> */?>
+                          <time datetime="{{ $event->datumvon }}">{{ $datumausgabe }}</time>
+                      <?php /*  </a>*/?>
                   </li>
                   @php /* <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="blog-single.html">14 Comments</a></li>*/ @endphp
                 </ul>
               </div>
 
               <div class="entry-content">
-                  <p>
-                      {!! $event->beschreibung !!}
-                  </p>
                   <h2>Einsatzplan</h2>
                 @php /*
                 <p>

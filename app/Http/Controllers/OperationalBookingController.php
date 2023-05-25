@@ -66,7 +66,7 @@ class OperationalBookingController extends Controller
         $operatingPlan = OperationalBooking::create($validatedData);
         $datumvon=date('d.m.Y', strtotime($request->datumvon));
 
-        if($request->email<>"" and $request->inputAngemeldet=="remember-me" and !isset($_COOKIE['cookie_consent'])) {
+        if($request->email<>"" and isset($_COOKIE['__cookie_consent'])) {
             $minutes = time()+(86400 * 365); //86400=1day
             setcookie('log_remember', $request->email, $minutes, "/");
         }
@@ -163,14 +163,14 @@ class OperationalBookingController extends Controller
         $datumvon=date('d.m.Y', strtotime($event->datumvon));
         $delete = OperationalBooking::find($operationalBookings_id)->delete();
 
-        $noData=1;
-        if(!isset($_COOKIE['log_remember'])) {
+        //$noData=1;
+        if(isset($_COOKIE['log_remember'])) {
             $OperationalBookingCount = OperationalBooking::where('email', $_COOKIE['log_remember'])->count();
             if ($OperationalBookingCount > 0) {
-                if (!isset($_COOKIE['__cookie_consent'])) {
-                    $minutes = time() + (86400 * 365); //86400=1day
+                if (isset($_COOKIE['__cookie_consent'])) {
+                    $minutes = time() + (86400 * 364); //86400=1day
                     setcookie('log_remember', $_COOKIE['log_remember'], $minutes, "/");
-                    $noData = 0;
+                    //$noData = 0;
                 }
             } else {
                 setcookie('log_remember', '', time() - 1);
@@ -181,7 +181,7 @@ class OperationalBookingController extends Controller
         return to_route('einsaetze' , [
             'event_id' => $OperationalBooking->event_id,
             'key'      => $datumvon,
-            'noData'   => $noData
+            //'noData'   => $noData
         ]);
     }
 }

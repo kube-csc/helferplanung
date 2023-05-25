@@ -16,8 +16,8 @@ class HelperListController extends Controller
             ->where('datum', '>=' , Carbon::now())
             ->count();
 
-        if($Request->loginEmail<>"" and $Request->inputAngemeldet=="remember-me" and !isset($_COOKIE['__cookie_consent'])) {
-            $minutes = time()+(86400 * 365); //86400=1day
+        if($Request->loginEmail<>"" and isset($_COOKIE['__cookie_consent'])) {
+            $minutes = time()+(86400 * 364); //86400=1day
             setcookie('log_remember', $Request->loginEmail, $minutes, "/");
         }
 

@@ -2,7 +2,6 @@
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
         <div class="container">
-
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Helferliste</h2>
                 <ol>
@@ -54,7 +53,7 @@
                                      <h4>bis {{ $startZeit }} von {{ $endZeit }}</h4>
                                 @endif
                                 @if($loginEmail==$OperationalBooking->email)
-                                    <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/löschen/{{ $OperationalBooking->id }}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
+                                    <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/loeschen/{{ $OperationalBooking->id }}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
                                 @else
                                     {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
                                 @endif

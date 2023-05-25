@@ -26,7 +26,7 @@ Route::get('/Einsätzebuchen/direkt/{Operationalplan_id}/{datum}/{ah}/{eh}', 'Ap
 Route::get('/Einsatz/stornieren/{operationalBookings_id}', 'App\Http\Controllers\OperationalBookingController@softDeleteDirekt');
 
 Route::get('/Helferliste', 'App\Http\Controllers\HelperListController@helperList');
-Route::get('/Einsatz/löschen/{operationalBookings_id}', 'App\Http\Controllers\HelperListController@softDelete');
+Route::get('/Einsatz/loeschen/{operationalBookings_id}', 'App\Http\Controllers\HelperListController@softDelete');
 Route::post('/Helferliste/Login', 'App\Http\Controllers\HelperListController@loginCheck');
 Route::get('/Anmelden', 'App\Http\Controllers\LoginController@emailLogin');
 Route::get('/Abmelden', 'App\Http\Controllers\LoginController@logout');

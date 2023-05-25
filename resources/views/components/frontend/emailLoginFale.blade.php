@@ -31,9 +31,9 @@
                 <div class="col-lg-6">
                     <div class="info-box mb-4">
                         <p>
-                            Sie haben keine Einsätze gebucht und kommen deshalb nicht die Helferliste angezeigt.
+                            Sie haben zur Zeit keine Einsätze gebucht und bekommen deshalb die Helferliste nicht angezeigt.
                         <br><br>
-                        <button type="button" class="btn btn-primary"><a href="/Anmelden">Anmelden</a></button>
+                        <button type="button" class="btn btn-primary"><a href="/Anmelden">anmelden</a></button>
                         </p>
                     </div>
                 </div>

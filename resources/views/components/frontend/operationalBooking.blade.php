@@ -66,7 +66,8 @@
                                 <label for="email">Email Adresse</label>
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Email address" value="{{ old('email') }}" required autofocus>
                             </div>
-                        @if(!isset($_COOKIE['cookie_consent']))
+                        <?php /*
+                        @if(!isset($_COOKIE['__cookie_consent']))
                             <br>
                             <div class="checkbox mb-3">
                                 <label>
@@ -74,6 +75,7 @@
                                 </label>
                             </div>
                         @endif
+                        */ ?>
                             @php /*
                             <div class="form-label-group">
                                 <label for="inputPassword">Password</label>
