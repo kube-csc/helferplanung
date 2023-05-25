@@ -32,7 +32,7 @@
                     <div class="info-box mb-4">
                         <b></b>
                         <p>
-                        <form class="border-t-fuchsia-900" autocomplete="off" action="/Einsätzebuchen/speichern" method="post">
+                        <form class="border-t-fuchsia-900" autocomplete="off" action="/Einsatz/buchen/speichern" method="post">
                             @csrf
                             <input type="hidden" id="timetabel_helper_lists_id" name="timetabel_helper_lists_id" value="{{ $operatingPlan->id }}">
                             <input type="hidden" id="datumvon" name="datumvon" value="{{ $operatingPlan->Event->datumvon }}">
@@ -95,7 +95,7 @@
 
                         </form>
                         <br>
-                        <button type="button" class="btn btn-primary"><a href="/Einsätze/{{ $operatingPlan->event_id }}/{{ $eventDatum }}">Zurück</a></button>
+                        <button type="button" class="btn btn-primary"><a href="/Einsatz/eintragen/{{ $operatingPlan->event_id }}/{{ $eventDatum }}">Zurück</a></button>
                         </p>
                     </div>
                 </div>

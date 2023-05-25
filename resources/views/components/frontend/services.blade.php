@@ -24,9 +24,9 @@
                     <div class="icon-box" data-aos="fade-up">
                         <h4 class="title">
                             @if(isset($_COOKIE['log_remember']))
-                                <a href="/Einsätze/{{ $event->id }}/{{ $datum }}">{{ $event->ueberschrift }}</a>
+                                <a href="/Einsatz/eintragen/{{ $event->id }}/{{ $datum }}">{{ $event->ueberschrift }}</a>
                             @else
-                                <a href="/Einsätze/{{ $event->id }}/0">{{ $event->ueberschrift }}</a>
+                                <a href="/Einsatz/eintragen/{{ $event->id }}/0">{{ $event->ueberschrift }}</a>
                             @endif
                         </h4>
                         <p class="description">{!! $ausgabetext !!}</p>
@@ -35,7 +35,7 @@
               @else
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="{{ $delay }}">
-                        <h4 class="title"><a href="/Einsätze/{{ $event->id }}/0">{{ $event->ueberschrift }}</a></h4>
+                        <h4 class="title"><a href="/Einsatz/eintagen/{{ $event->id }}/0">{{ $event->ueberschrift }}</a></h4>
                         <p class="description">{!! $ausgabetext !!}</p>
                     </div>
                 </div>

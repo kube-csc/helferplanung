@@ -46,9 +46,9 @@
 
               @if($freePlan>0)
                 @if($noData==0)
-                    <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/direkt/{{ $freeOperationalplan->id }}/{{ $freeOperationalplan->datum }}/{{ $aih }}/{{ $eih }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+                    <a class="btn btn-primary mb-lg-2" href="/Einsatz/buchen/direkt/{{ $freeOperationalplan->id }}/{{ $freeOperationalplan->datum }}/{{ $aih }}/{{ $eih }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
                 @else
-                   <a class="btn btn-primary mb-lg-2" href="/Einsätzebuchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
+                   <a class="btn btn-primary mb-lg-2" href="/Einsatz/buchen/{{ $freeOperationalplan->id }}/{{ $i }}" role="button">{{ $freePlan }} Helfer {{ $datum }} von {{ $aih }} bis {{ $eih }} Uhr</a>
                @endif
               @endif
         @endfor

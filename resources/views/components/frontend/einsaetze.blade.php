@@ -26,7 +26,7 @@
               </div>
               */ @endphp
               <h2 class="entry-title">
-                <?php /* <a href="/Einsätze/{{ $event->id }}/0"> */?>
+                <?php /* <a href="/Einsatz/eintagen/{{ $event->id }}/0"> */?>
                     {{ $event->ueberschrift }}
                 <?php /*  </a>*/?>
               </h2>
@@ -44,7 +44,7 @@
                     }
                   @endphp
                   <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i>
-                      <?php /* <a href="/Einsätze/{{ $event->id }}/0"> */?>
+                      <?php /* <a href="/Einsatz/eintagen/{{ $event->id }}/0"> */?>
                           <time datetime="{{ $event->datumvon }}">{{ $datumausgabe }}</time>
                       <?php /*  </a>*/?>
                   </li>
