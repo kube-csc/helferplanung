@@ -20,7 +20,7 @@
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                 <h2>Helferliste</h2>
                 <p class="text-justify">
-                    Es können gebuchte Einsatze storniert werden. Du must einfach auf den Button deines Einsatzes klicken.
+                  Es ist möglich, gebuchte Einsätze zu stornieren. Dazu müssen Sie nur auf die Schaltfläche Ihrer Einsätze klicken.
                 </p>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="200">

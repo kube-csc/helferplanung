@@ -7,6 +7,8 @@ use App\Models\OperationalBooking;
 use App\Models\TimetabelHelperList;
 use App\Http\Requests\StoreOperationalBookingRequest;
 use App\Http\Requests\UpdateOperationalBookingRequest;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class OperationalBookingController extends Controller
 {
@@ -42,15 +44,15 @@ class OperationalBookingController extends Controller
                 $endzeit=date('H:i' , $eit);
             }
 
-            return view('pages.operationalBooking' , [
-                'operatingPlan'           => $operatingPlan,
-                'operational_location_id' => $operatingPlan->operational_location_id,
-                'eventDatum'              => $eventDatum,
-                'operationalDatum'        => $operationalDatum,
-                'datum'                   => $datum,
-                'startzeit'               => $startzeit,
-                'endzeit'                 => $endzeit
-            ]);
+        return view('pages.operationalBooking' , [
+            'operatingPlan'           => $operatingPlan,
+            'operational_location_id' => $operatingPlan->operational_location_id,
+            'eventDatum'              => $eventDatum,
+            'operationalDatum'        => $operationalDatum,
+            'datum'                   => $datum,
+            'startzeit'               => $startzeit,
+            'endzeit'                 => $endzeit
+        ]);
     }
 
     /**
@@ -62,13 +64,31 @@ class OperationalBookingController extends Controller
 
     public function store(StoreOperationalBookingRequest $request)
     {
-        $validatedData = $request->validated();
-        $operatingPlan = OperationalBooking::create($validatedData);
-        $datumvon=date('d.m.Y', strtotime($request->datumvon));
+        //$validatedData = $request->validated();
+        //$operatingPlan = OperationalBooking::create($validatedData);
 
-        if($request->email<>"" and isset($_COOKIE['__cookie_consent'])) {
+        $OperationalBooking= new OperationalBooking(
+            [
+                'event_id'                 => $request->event_id,
+                'operational_location_id'  => $request->operational_location_id,
+                'timetabel_helper_lists_id'=> $request->timetabel_helper_lists_id,
+                'user_id'                  => $request->user_id,
+                'Vorname'                  => $request->Vorname,
+                'Nachname'                 => $request->Nachname,
+                'email'                    => Str::lower($request->email),
+                'datum'                    => $request->datumvon,
+                'startZeit'                => $request->startZeit,
+                'endZeit'                  => $request->endZeit,
+                'updated_at'               => Carbon::now(),
+                'created_at'               => Carbon::now()
+            ]
+        );
+        $OperationalBooking->save();
+
+        $datumvon=date('d.m.Y', strtotime($request->datumvon));
+           if($request->email<>"" and isset($_COOKIE['__cookie_consent'])) {
             $minutes = time()+(86400 * 365); //86400=1day
-            setcookie('log_remember', $request->email, $minutes, "/");
+            setcookie('log_remember', Str::lower($request->email), $minutes, "/");
         }
         $noData=0;
 

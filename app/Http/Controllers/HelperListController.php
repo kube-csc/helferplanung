@@ -6,19 +6,19 @@ use App\Http\Requests\StoreHelperListRequest;
 use App\Models\Event;
 use App\Models\OperationalBooking;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Str;
 
 class HelperListController extends Controller
 {
     public function loginCheck(StoreHelperListRequest $Request)
     {
-        $OperationalBookingCount=OperationalBooking::where('email' , $Request->loginEmail)
+        $OperationalBookingCount=OperationalBooking::where('email' , Str::lower($Request->loginEmail))
             ->where('datum', '>=' , Carbon::now())
             ->count();
 
         if($Request->loginEmail<>"" and isset($_COOKIE['__cookie_consent'])) {
             $minutes = time()+(86400 * 364); //86400=1day
-            setcookie('log_remember', $Request->loginEmail, $minutes, "/");
+            setcookie('log_remember', Str::lower($Request->loginEmail), $minutes, "/");
         }
 
         if($OperationalBookingCount>0) {
@@ -33,7 +33,7 @@ class HelperListController extends Controller
         }
         return view('pages.helferList' , [
                      'OperationalBookings' => $OperationalBookings,
-                     'loginEmail'          => $Request->loginEmail
+                     'loginEmail'          => Str::lower($Request->loginEmail)
         ]);
     }
 
@@ -44,11 +44,15 @@ class HelperListController extends Controller
             ->orderBy('operational_location_id')
             ->orderBy('startZeit')
             ->get();
-
-        return view('pages.helferList' , [
-            'OperationalBookings' => $OperationalBookings,
-            'loginEmail'          => $_COOKIE['log_remember']
-        ]);
+        if(isset($_COOKIE['log_remember'])) {
+            return view('pages.helferList', [
+                'OperationalBookings' => $OperationalBookings,
+                'loginEmail' => $_COOKIE['log_remember']
+            ]);
+        }
+        else{
+            return view('pages.emailLogin');
+        }
     }
 
     /**

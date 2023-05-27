@@ -63,8 +63,8 @@
                             </div>
 
                             <div class="form-label-group">
-                                <label for="email">Email Adresse</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Email address" value="{{ old('email') }}" required autofocus>
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus>
                             </div>
                         <?php /*
                         @if(!isset($_COOKIE['__cookie_consent']))
