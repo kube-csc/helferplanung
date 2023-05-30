@@ -20,7 +20,7 @@
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                 <h2>Helferliste</h2>
                 <p class="text-justify">
-                  Es ist möglich, gebuchte Einsätze zu stornieren. Dazu müssen Sie nur auf die Schaltfläche Ihrer Einsätze klicken.
+                  Es ist möglich, gebuchte Einsätze zu stornieren. Dazu einfach auf die Schaltfläche der gebuchten Einsätze klicken.
                 </p>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="200">
@@ -53,16 +53,16 @@
                                      <h4>bis {{ $startZeit }} von {{ $endZeit }}</h4>
                                 @endif
                                 @if($loginEmail==$OperationalBooking->email)
-                                    <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/loeschen/{{ $OperationalBooking->id }}" role="button">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
+                                    <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/loeschen/{{ $OperationalBooking->id }}" role="button" onclick="return confirm('Wirklich den Einsatz zu löschen?')">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
                                 @else
                                     {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
                                 @endif
-                            @php
-                                $eventIdMerk=$OperationalBooking->event_id;
-                                $einsatzortMerk=$OperationalBooking->operational_location_id;
-                                $datumMerk=$datum;
-                                $startZeitMerk=$startZeit;
-                            @endphp
+                                @php
+                                    $eventIdMerk=$OperationalBooking->event_id;
+                                    $einsatzortMerk=$OperationalBooking->operational_location_id;
+                                    $datumMerk=$datum;
+                                    $startZeitMerk=$startZeit;
+                                @endphp
 
                             @endforeach
                         </p>
