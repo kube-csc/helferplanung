@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreHelperListRequest;
 use App\Models\Event;
 use App\Models\OperationalBooking;
+use App\Models\OperationalLocation;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -39,15 +40,17 @@ class HelperListController extends Controller
 
     public function helperList()
     {
-        $OperationalBookings = OperationalBooking::where('datum', '>=', Carbon::now())
-            ->orderBy('datum')
-            ->orderBy('operational_location_id')
-            ->orderBy('startZeit')
+     $OperationalBookings = OperationalBooking::select('operational_bookings.*')
+            ->join('operational_locations', 'operational_locations.id', '=', 'operational_bookings.operational_location_id')
+            ->orderBy('operational_bookings.datum')
+            ->orderBy('operational_locations.einsatzort')
+            ->orderBy('operational_bookings.startZeit')
             ->get();
+
         if(isset($_COOKIE['log_remember'])) {
             return view('pages.helferList', [
                 'OperationalBookings' => $OperationalBookings,
-                'loginEmail' => $_COOKIE['log_remember']
+                'loginEmail'          => $_COOKIE['log_remember']
             ]);
         }
         else{

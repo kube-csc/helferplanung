@@ -79,7 +79,7 @@ class TimetabelHelperListResource extends Resource
                              ->label('Anzahl der Helfer')
                              ->required()
                              ->minValue('1')
-                             ->maxValue('5')
+                             ->maxValue('99')
                              ->numeric('true'),
                     ])
        );

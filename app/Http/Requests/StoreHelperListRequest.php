@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\OperationalBooking;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreHelperListRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class StoreHelperListRequest extends FormRequest
      */
     public function authorize()
     {
-        //$OperationalBookings=OperationalBooking::where('email' , $Request->loginEmail)->get();
+        //$OperationalBookings=OperationalBooking::where('email' , Str::lower($Request->loginEmail))->get();
         return true;
     }
 

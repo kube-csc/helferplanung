@@ -26,8 +26,6 @@
             <div class="row" data-aos="fade-up" data-aos-delay="200">
                 <div class="col-lg-6">
                     <div class="info-box mb-4">
-                        <b></b>
-                        <p>
                             @php
                                 $eventIdMerk=0;
                                 $einsatzortMerk=0;
@@ -41,23 +39,56 @@
                                     $endZeit=date('H:i', strtotime($OperationalBooking->endZeit));
                                 @endphp
                                 @if($eventIdMerk<>$OperationalBooking->event_id)
-                                    <h1>{{ $OperationalBooking->event->ueberschrift }}</h1>
+                                    @if($eventIdMerk<>0)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-6">
+                    <div class="info-box mb-4">
+                        <hr class="mt-3 mb-3"/>
+                                    @endif
+                        <h1>{{ $OperationalBooking->event->ueberschrift }}</h1>
+                        <p>
+                                    @php
+                                        $datumMerk="";
+                                    @endphp
                                 @endif
                                 @if($datumMerk<>$datum)
+                                    @if($datumMerk<>"")
+                                      <hr class="mt-3 mb-3"/>
+                                    @endif
                                     <h2>{{ $datum }}</h2>
+                                    @php
+                                      $einsatzortMerk="";
+                                    @endphp
                                 @endif
                                 @if($einsatzortMerk<>$OperationalBooking->operational_location_id)
-                                     <h3>{{ $OperationalBooking->OperationalLocation->einsatzort }}</h3>
+                                    @if($einsatzortMerk<>"")
+                                        <hr class="mt-3 mb-3"/>
+                                    @endif
+                                    <h3>{{ $OperationalBooking->OperationalLocation->einsatzort }}</h3>
+                                    @php
+                                      $startZeitMerk="";
+                                    @endphp
                                 @endif
                                 @if($startZeitMerk<>$startZeit)
-                                     <h4>bis {{ $startZeit }} von {{ $endZeit }}</h4>
+                                    @if($startZeitMerk<>"" && $startZeitMerk=="")
+                                        <hr class="mt-3 mb-3"/>
+                                    @endif
+                                    <h4>bis {{ $startZeit }} Uhr von {{ $endZeit }} Uhr</h4>
+                                    @php
+                                      $namenstrenner="";
+                                    @endphp
                                 @endif
                                 @if($loginEmail==$OperationalBooking->email)
-                                    <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/loeschen/{{ $OperationalBooking->id }}" role="button" onclick="return confirm('Wirklich den Einsatz zu löschen?')">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
+                                   {{ $namenstrenner }}<a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/loeschen/{{ $OperationalBooking->id }}" role="button" onclick="return confirm('Wirklich den Einsatz löschen?')">{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}</a>
                                 @else
-                                    {{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
+                                   {{ $namenstrenner }}{{ $OperationalBooking->Vorname }} {{ $OperationalBooking->Nachname }}
                                 @endif
                                 @php
+                                    $namenstrenner=", ";
                                     $eventIdMerk=$OperationalBooking->event_id;
                                     $einsatzortMerk=$OperationalBooking->operational_location_id;
                                     $datumMerk=$datum;

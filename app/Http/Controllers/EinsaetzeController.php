@@ -13,10 +13,11 @@ class EinsaetzeController extends Controller
     {
         $event = Event::find($event_id);
 
-        $timetabelHelperLists=TimetabelHelperList::where('event_id' , $event_id)
-            ->orderby('operational_location_id')
-            ->orderby('datum')
-            ->orderby('startZeit')
+        $timetabelHelperLists = TimetabelHelperList::select('timetabel_helper_lists.*')
+            ->join('operational_locations', 'operational_locations.id', '=', 'timetabel_helper_lists.operational_location_id')
+            ->orderBy('timetabel_helper_lists.datum')
+            ->orderBy('operational_locations.einsatzort')
+            ->orderBy('timetabel_helper_lists.startZeit')
             ->get();
 
         $noData=1;

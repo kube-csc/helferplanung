@@ -75,7 +75,7 @@
                             $startZeitBocked = date('H:i' , strtotime($OperationalBookingBocked->startZeit));
                             $endZeitBocked   = date('H:i' , strtotime($OperationalBookingBocked->endZeit));
                         @endphp
-                        <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/stornieren/{{$OperationalBookingBocked->id}}" role="button" onclick="return confirm('Wirklich den Einsatz zu löschen?')">{{ $datumBocked }} von {{ $startZeitBocked }} bis {{ $endZeitBocked }} Uhr</a>
+                        <a class="btn btn-outline-primary mb-lg-2" href="/Einsatz/stornieren/{{$OperationalBookingBocked->id}}" role="button" onclick="return confirm('Wirklich den Einsatz löschen?')">{{ $datumBocked }} von {{ $startZeitBocked }} bis {{ $endZeitBocked }} Uhr</a>
                     @endforeach
                   @endif
                 </div>
