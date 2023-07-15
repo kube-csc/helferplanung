@@ -234,6 +234,39 @@ class EventSeeder extends Seeder
                                         'updated_at' => '2021-03-28 13:06:42',
                                         'freigabe' => '',
                                     ),
+                                7 =>
+                                    array (
+                                        'id' => 8,
+                                        'datumvon' => '2051-06-11',
+                                        'datumbis' => '2051-06-12',
+                                        'datumvona' => NULL,
+                                        'datumbisa' => NULL,
+                                        'ueberschrift' => 'Eventserie 3',
+                                        'beschreibung' => 'Hier steht die Beschreibung von der Eventserie 3.
+                                     Das Event ist ein Event der Mannschaft 3.
+                                     Es wird eine Regatta zu diesem Event durchgeführt.
+                                     ',
+                                        'ansprechpartner' => 'Teamleiter',
+                                        'telefon' => '23456 7890543',
+                                        'email' => 'teamleiter@email.de',
+                                        'homepage' => 'Homepage',
+                                        'sportSection_id' => '5',
+                                        'startseite' => '',
+                                        'nachtermin' => '',
+                                        'anmeldetext' => '',
+                                        'onlinemeldung' => '0',
+                                        'created_at' => '2021-03-28 13:06:42',
+                                        'regatta' => 1,
+                                        'verwendung' => 0,
+                                        'eventGroup_id' => 2,
+                                        'einverstaendnis' => '',
+                                        'teilnehmer' => 0,
+                                        'teilnehmermax' => 0,
+                                        'autor_id' => 1,
+                                        'bearbeiter_id' => 1,
+                                        'updated_at' => '2021-03-28 13:06:42',
+                                        'freigabe' => '',
+                                    ),
                     ));
     }
 }

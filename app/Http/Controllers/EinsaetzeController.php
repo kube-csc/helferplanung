@@ -15,8 +15,9 @@ class EinsaetzeController extends Controller
 
         $timetabelHelperLists = TimetabelHelperList::select('timetabel_helper_lists.*')
             ->join('operational_locations', 'operational_locations.id', '=', 'timetabel_helper_lists.operational_location_id')
-            ->orderBy('timetabel_helper_lists.datum')
+            ->where('timetabel_helper_lists.event_id' , $event_id)
             ->orderBy('operational_locations.einsatzort')
+            ->orderBy('timetabel_helper_lists.datum')
             ->orderBy('timetabel_helper_lists.startZeit')
             ->get();
 
