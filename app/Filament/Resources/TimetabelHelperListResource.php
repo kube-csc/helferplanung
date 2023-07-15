@@ -121,7 +121,8 @@ class TimetabelHelperListResource extends Resource
                 SelectFilter::make('event')
                     ->relationship('event', 'ueberschrift'),
                 SelectFilter::make('operationalLocation')
-                    ->relationship('operationalLocation', 'einsatzort')
+                    ->relationship('operationalLocation', 'einsatzort'),
+                Tables\Filters\TrashedFilter::make('trashed')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

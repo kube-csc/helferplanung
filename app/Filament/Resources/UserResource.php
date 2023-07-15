@@ -17,6 +17,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
@@ -94,8 +95,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nachname'),
-                TextColumn::make('vorname'),
+                TextColumn::make('nachname')
+                    ->searchable(),
+                TextColumn::make('vorname')
+                    ->searchable(),
                 TextColumn::make('geschlecht'),
                 TextColumn::make('telefon'),
                 TextColumn::make('name')
@@ -103,7 +106,7 @@ class UserResource extends Resource
                 TextColumn::make('email'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\TrashedFilter::make('trashed'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
